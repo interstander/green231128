@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 테이블(표) -->
+    <!--  table 태그 : 표를 생성 -->
+    <!--  tr 태그 : 행을 생성 -->
+    <!--  td 태그 : 하나의 행 내부에 칸을 생성-->
+    <h3>성적표</h3>
+    <table border="1">
+        <tr>  <!-- : 하나의 행-->
+            <td>하츄핑</td>  <!-- : 하나의 칸-->
+            <td>85</td>
+            <td>방글핑</td>
+            <td>79</td>
+        </tr>
+        <tr>
+            <td>와플핑</td>
+            <td>97</td>
+            <td>샌드핑</td>
+            <td>76</td>
+        </tr>
+    </table>
+    <hr>
+    <table border="1">
+        <caption>성적표</caption>
+        <thead>
+            <tr>
+                <td>전공</td>
+                <th>번호</th>
+                <th colspan="2">학생</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th rowspan="2">문과</th>
+                <td>1</td>
+                <td>새콤핑</td>
+                <td>70</td>
+            </tr>
+            <tr>
+                <!-- <td>문과</td> -->
+                <td>2</td>
+                <td>달콤핑</td>
+                <td>80</td>
+            </tr>
+            <tr>
+                <td>이과</td>
+                <td>3</td>
+                <td>행운핑</td>
+                <td>95</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>문이과통합</td>
+                <td>번호</td>
+                <td>총점</td>
+                <td>145</td>
+            </tr>
+        </tfoot>
+
+
+    </table>
+</body>
+</html>
+
+

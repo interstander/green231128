@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>입력 요소</h3>
+    <!-- input 태그 -->
+    <form action="#">
+
+        <fieldset>
+            <legend>기본정보</legend>
+            <label>이름 : <input type="text" name="name" ><!-- text : 문자열--></label><br>
+            비밀번호 : <input type="password" name="pwd"><!-- password :  암호--><br>
+            사진 : <input type="file"><!-- file :  파일업로드--><br>
+            성별 : <input type="radio" name="gender">남<!-- radio : 배타적 선택-->
+                <input type="radio" name="gender">여<br>
+            취미 : <input type="checkbox" name="hobby" >낚시
+                <input type="checkbox" name="hobby" >독서 
+                <input type="checkbox" name="hobby" >게임 <br> 
+            <input type="hidden">  <!--  hidden : 숨김 속성-->
+            <input type="button" value="버튼1">
+            <button type="button">그냥 버튼</button>
+            <button type="submit">제출</button>
+            <button type="reset">초기화</button>
+        </fieldset>
+
+        <hr>
+        <fieldset>
+            <legend>추가정보</legend>
+            <label for="name2">이름 :</label>
+            <input type="text" name="name2" id="name2" 
+                placeholder="이름을 작성하세요." 
+                required 
+                maxlength="5" 
+                minlength="2" ><br>
+
+            나이 : <input type="number" min="0" max="100" step="0.1"><br>
+            전화번호 : <input type="tel" name="" id=""><br>
+            이메일 : <input type="email" name="" id=""><br>
+            생년월일 : <input type="date" name="" id=""><br>
+            색상 : <input type="color"><br>
+            범위 : <input type="range" min="0" max="10" step="1"><br>
+            하고 싶은 말 : 
+            <textarea name="" id="" cols="30" rows="5">배가 부릅니다!!</textarea><br>
+            배우고 싶은 언어 : 
+            <select name="lang" id="" multiple >
+                <option value="java">Java</option>
+                <option value="python">Python</option>
+                <option value="c#">C#</option>
+            </select>
+        </fieldset>
+    </form>
+    <!-- 클라이언트가 입력한 내용을 웹서버로 보내기 위해서는 name속성과 value 속성이 필요하다.-->
+</body>
+</html>
