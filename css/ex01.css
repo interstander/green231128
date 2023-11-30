@@ -1,0 +1,14 @@
+/*
+    CSS의 영역 => CSS 문법으로 작성된 코드만 작성해야 함.
+
+    1. 외부 스타일 시트 : CSS 파일을 별도로 저장하는 방식!
+      => 유지보수 도움이 되므로 가장 권장되는 방식
+*/
+h2{
+    background-color: yellow;
+}
+p{
+   color:pink;
+   background-color: indigo; 
+   font-size: 30px;
+}
