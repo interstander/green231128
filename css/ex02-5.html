@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #daum:link{
+            text-decoration: line-through;
+        }
+        #daum:visited{
+            border: 3px solid blue;
+        }
+        #daum:active{
+            color: yellowgreen;
+        }
+        #daum:hover{
+            background-color: red;
+        }
+        #check:focus{
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        10. 가상 선택자 : 실제 웹 문서의 요소로는 존재하지 않지만 임의로 지정하는 가상의 선택자
+         - 링크 선택자 : 링크의 상태에 따라 선택할지 고르는 선택자
+           - A:link    : 방문하지 않았던 링크를 선택
+           - A:visited : 방문했었던 링크를 선택
+           - A:active  : 링크요소에 마우스를 클릭 또는 키보드 엔터키가 눌린 동안에 선택
+           - A:hover   : 링크요소에 마우스 커서가 올라가 있는 동안 선택
+           - A:focus   : 입력요소에 포커스가 머무는 동안 선택 
+           - A:checked : 입력요소에 checked가 적용된 요소는 선택
+    -->
+    <a id="daum" href="http://www.daum.net" target="_blank">다음</a><br>
+    <input id="check" type="text"><br>
+    <!-- -->
+    <input type="checkbox" name="" id="" checked="checked"><br>
+    <input type="radio" name="" id="" checked>
+    <select name="" id="">
+        <option value="">A</option>
+        <option value="" selected>B</option>
+    </select>
+</body>
+</html>
+
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* #second~p{ */
+        #second+p{
+            background-color: coral;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        7. 일반 형제 요소 선택자 (A~B): 
+                 A태그의 형제요소로서 A태그 아래에 나오는 모든 B태그를 요소로 선택 
+        
+        8. 인접 형제 요소 선택자 (A+B) : 
+                A태그의 바로 아래 형제 요소로서 B태그를 요소로 선택
+                (A태그 바로 아래 형제요소가 B가 아니라면 선택하지 않는다!) 
+    -->
+    <div>
+        <p>안녕하세요</p>
+        <p id="second">안녕하세요</p>
+        <p>안녕하세요</p>
+        <div>안녕하세요-div</div>
+        <p>안녕하세요</p>
+        <div>안녕하세요-div</div>
+        <p>안녕하세요</p>
+    </div>
+</body>
+</html>

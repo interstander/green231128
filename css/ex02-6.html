@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         p:nth-child(2n){
+            font-size: x-large;
+            color: aqua;
+        }
+        p:nth-of-type(2n){
+            background-color: tomato;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        10. 가상 선택자 :
+          - 구조적 가상 선택자 : 선택하고자 하는 요소의 위치에 따라 선택할 지 고르는 선택자
+                (-child :  순서를 셀때 A가 아닌 태그도 포함해서 순서를 센다)
+            - A:nth-child(n) : 앞에서 부터 지정된 순서와 일치하는 요소가 A태그라면 선택
+            - A:nth-last-child(n) : 뒤에서 부터 지정된 순서와 일치하는 요소가 A태그라면 선택
+            - A:first-child : 첫번째 요소가 A태그라면 선택
+            - A:last-child : 마지막 요소가 A태그라면 선택
+            - A:only-child : A태그가 유일한 자식 요소라면 선택
+
+                (-of-type :  순서를 셀때 A가 아닌 태그도 포함하지 않고 순서를 센다)
+            - A:nth-of-type(n) : 앞에서 부터 지정된 순서와 일치하는 요소가 A태그라면 선택
+            - A:nth-last-of-type(n) : 뒤에서 부터 지정된 순서와 일치하는 요소가 A태그라면 선택
+            - A:first-of-type : 첫번째 요소가 A태그라면 선택
+            - A:last-of-type : 첫번째 요소가 A태그라면 선택
+            - A:only-of-type : A태그가 유일한 자식 요소라면 선택
+                        (A태그가 아닌 요소는 포함되어있어도 상관없다)
+
+            - A:empty : A태그에 컨텐츠가 없는 요소를 선택
+    -->
+    <div>
+        <p>반갑습니다~P</p>
+        <div>안녕하세요~div</div>
+        <p>반갑습니다~P</p>
+        <p>반갑습니다~P</p>
+        <div>안녕하세요~div</div>
+        <div>안녕하세요~div</div>
+        <p>반갑습니다~P</p>
+        <p>반갑습니다~P</p>
+        <div>안녕하세요~div</div>
+        <div>안녕하세요~div</div>
+        <p>반갑습니다~P</p>
+        <p>반갑습니다~P</p>
+        <div>안녕하세요~div</div>
+        <div>안녕하세요~div</div>
+        <p>반갑습니다~P</p>
+        <p>반갑습니다~P</p>
+        <div>안녕하세요~div</div>
+        <p>반갑습니다~P</p>
+    </div>
+
+</body>
+</html>
