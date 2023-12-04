@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            텍스트(문장) 관련 속성
+            1. 색상
+              - 글자 색 : color
+                : 색 표현 방법
+                    1) 키워드 : black, blue, red......(비전문가!!)
+                    2) Hex(16진수) : #000000   두자리씩 끊어서  빨강:00~FF, 초록:00~FF, 파랑:00~FF  (디자인 전문가 선호!)
+                        -> #FF00FF => #F0F
+                    2-1) Hex + A :  #00000000   끝에 두자리는 투명도 00(완전 투명)~FF(완전불투명)
+                    3) rgb(10진수) : rgb(0,0,0)  빨강:0~255, 초록:0~255, 파랑 0~255 
+                    3-1) rgba(투명도)  : rgba(0,0,0,0.0)    투명도 0.0(완전투명)~1.0(완전불투명)  
+                    4) HSL 
+            
+            2. 정렬 방법
+              - 텍스트 좌우 정렬하는 속성 : text-align
+                : left, right, center 
+            
+            3. 장식선(밑줄, 취소선....)
+              - 장식선을 추가하는 속성 : text-decoration-line
+                : underline(밑줄), overline(윗줄), line-through(취소선)
+              - 장식선 색 변경 속성 : text-decoration-color
+              - 장식선의 유형 속성 : text-decoration-style
+                : solid(실선), dotted(점선), double(이중실선), dashed(점선), wavy(물결표시)
+              - 장식선의 굵기 : text-decoration-thickness
+                : auto(기본값) , 숫자px , %(글자 크기 기준)
+            => shorthand(속기형) -> 유사한 속성을 축약해서 사용하는 방법
+              
+            4. 변환(대소문자)
+              - 대소문자를 자동으로 변환해주는 속성 : text-transform
+                : uppercase(대문자), lowercase(소문자), capitalize(단어의 첫글자만 대문자)
+
+            5. 간격
+              - 각 글자 사이의 간격을 조정하는 속성 : letter-spacing
+                : 숫자 px
+              - 단어와 단어 사이의 간격을 조정하는 속성 : word-spacing
+                : 숫자 px
+              - 행간의 높이를 조정하는 속성 : line-height   (위아래 텍스트 가운데 정렬에 사용됨)
+                : 숫자 px(직접 높이를 지정), 숫자(글자의 배수, 1.5 => 글자의 1.5배), %(글자 크기 기준으로 %)
+              - 텍스트 들여쓰기 깊이 조절 속성 : text-indent
+                : 숫자 px
+              - 내부공백요소(띄어쓰기, 줄바꿈) 처리하기 위한 속성 : white-space
+                - normal(기본값) : 띄어쓰기 X, 줄바꿈 X , 자동 줄바꿈 O
+                - nowrap         : 띄어쓰기 X, 줄바꿈 X , 자동 줄바꿈 X
+                - pre(있는 그대로): 띄어쓰기 O, 줄바꿈 O , 자동 줄바꿈 X
+                - pre-wrap       : 띄어쓰기 O, 줄바꿈 O , 자동 줄바꿈 O
+                - pre-line       : 띄어쓰기 X, 줄바꿈 O , 자동 줄바꿈 O
+            
+            6. 그림자
+              - 텍스트의 그림자를 생성하는 속성 : text-shadow
+                - 가로그림자 : 숫자px
+                - 세로그림자 : 숫자px
+                - 그림자의 흐림도 : 숫자px
+                - 그림자 색상 : 색
+        */
+        p{
+            color: rgba(128,56,95,1.0);
+            text-align: left;
+            /* 
+            text-decoration-line: underline;
+            text-decoration-color: red;
+            text-decoration-style: wavy;
+            text-decoration-thickness: 5px; 
+            */
+            /* text-decoration:wavy underline red ; */
+            text-transform: capitalize;
+            /* letter-spacing: 3px;
+            word-spacing: 10px; */
+            white-space: normal;
+            text-shadow: 1px 1px 2px, 2px 2px 2px gray;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>
+            hello     mY    friend
+            my    name    is    
+            홍길동
+        </p>
+
+    </div>
+</body>
+</html>

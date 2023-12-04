@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    /*
+        테이블 관련 속성
+        1. 테이블 경계선(테두리)관련 속성
+           - border-style : 경계선 유형
+               - solid, double, dotted, dashed
+               - groove, ridge, inset, outset,
+               - none
+           - border-width : 경계선 굵기(너비)
+               - 숫자 px, em
+               - thin(얇게), thick(두껍게), medium(보통)
+           - border-color : 색
+
+           - 속기형 : border: solid 1px red;
+           
+           - 내 외부 테두리 결합 : border-collapse
+             - separate : 경계선 분리(기본값)
+             - collapse : 경계선 결합
+        2. 캡션 위치를 제어하는 속성 :  caption-side
+             - top : (기본값) 캡션의 위치가 테이블 상단에 위치
+             - bottom :  캡션의 위치가 테이블 하단에 위치
+        
+        3. 테이블 크기에 관련된 속성 : table, th, td
+            - width : 너비(가로 길이)
+            - height : 높이 (세로 길이)
+            
+            - 숫자px, %단위
+        4. 테이블 내부 정렬에 관련된 속성 : 
+            - text-align : 가로 정렬
+                - left, right, center
+            - vertical-align : 세로 정렬 => 요소가 테이블 아이템인 경우에만 사용
+                - top, bottom, center
+        */
+        table{
+            border: 1px solid black;
+            border-collapse: collapse;
+            caption-side: bottom;
+            width: 180px;
+            height:360px;
+        }
+        th,td{
+            text-align: center;
+            vertical-align: bottom;
+        }
+        th{
+            /* border: 1px solid red; */
+            width: 100px;
+            border-bottom: 3px solid red;
+            border-top: 1px dotted red;
+            border-left: 1px solid violet;
+            border-right: 1px solid green;
+        }
+        td{
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <table>
+            <caption>학생 정보</caption>
+            <tr>
+                <th>학번</th>
+                <th>이름</th>
+            </tr>
+            <tr>
+                <td>20232451</td>
+                <td>김시민</td>
+            </tr>
+            <tr>
+                <td>20231513</td>
+                <td>곽재우</td>
+            </tr>
+            <tr>
+                <td>20231864</td>
+                <td>권율</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
