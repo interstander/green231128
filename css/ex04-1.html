@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            --- 박스 모델 --- 
+             - CSS가 생각하는 HTML 요소의 생김새
+
+            1. 박스 모델의 기본 : HTML 요소 내부의 컨텐츠
+                - 크기 : width (가로 길이), height(높이 길이)
+                - 내용물에 따라서 자동으로 크기가 조정
+            
+            2.  박스의 테두리(경계선) : 다른 요소와 닫는 부분을 경계선(border)이라고 한다.
+                - 경계선에 관련된 속성
+                - 스타일 : border-style
+                   = none, solid, dotted, dashed, double
+                - 너비(굵기) : border-width
+                   = px, em
+                - 색 : border-color
+                   = 색(키워드, #000000, rgb(0,0,0)...)
+                
+                - 위치 상(top), 하(bottom), 좌(left), 우(right)
+                   border-top-style, border-bottom-width, border-left-color ......
+                
+                - 속기형으로 줄여서 사용 가능
+                        (4개 값 : 상을 기준으로 시계방향)
+                    border-style : solid dotted double dashed
+                                    상    우      하     좌
+                        (2개 값 : 상하, 좌우)
+                    border-color : red   blue;
+                                   상하  좌우
+                        (1개 값 : 상하좌우)
+                    border-width : 3px;
+                                  상하좌우
+                    border: 최대한 전부 축약된 형태
+             
+            3. 패딩 : 요소 내부에서 테두리와 컨텐츠 사이의 공간
+                    - 거리(테두리와 컨텐츠 사이의 거리) 
+                      상 하 좌 우
+                      padding-top, padding-bottom, padding-left, padding-right
+                    - 속기형 : padding: 5px;
+                        (값이 4개면 상 우 하 좌)
+                        padding: 3px 4px 5px 6px;
+                        (값이 2개면 상하, 좌우)
+                        padding: 4px 6px;
+                        (값이 1개면 상하좌우)
+                        padding: 5px;
+            
+            4. 마진 : 요소 외부에서 다른 요소와의 간격
+                    - 거리(요소와 다른 요소 마진까지의 거리) 
+                      상 하 좌 우
+                      margin-top, margin-bottom, margin-left, margin-right
+                    - 속기형 : margin: 5px;
+                        (값이 4개면 상 우 하 좌)
+                        margin: 3px 4px 5px 6px;
+                        (값이 2개면 상하, 좌우)
+                        margin: 4px 6px;
+                        (값이 1개면 상하좌우)
+                        margin: 5px;
+
+        *** 크롬 브라우저 :  브라우저 자체에 마진을 가진다. => 마진을 없애는 작업
+
+            5. 테두리 - 곡률 : radius
+                    border-top-left-radius     : 50px  40px 
+                    border-top-right-radius    : 50px
+                    border-bottom-left-radius  :
+                    border-bottom-right-radius :
+                - 속기형 가능
+                   (값이 4개면 상좌, 상우, 하우, 하좌)
+                   border-radius : 50px 60px 70px 80px;
+                   (값이 3개면 상좌, [상우하좌] 하우)
+                    border-radius : 50px 60px 70px;
+                   (값이 2개면 [상좌하우], [상우하좌])
+                    border-radius : 50px 60px;
+                   (값이 1개면 네 모서리가 동일한 곡률을 가진다.)
+                    border-radius : 50px;
+        
+            - 박스의 크기 계산 : width, height => 컨텐츠 크기
+                => 진짜 박스의 크기: "컨텐츠의 크기+패딩(상하좌우)+테두리(상하좌우)"
+
+                진짜 박스의 크기 측정하는데 도움을 주는 속성 : box-sizing
+                    : content-box(기본값) : (width, height)의 크기 = 컨텐츠의 크기
+                    : border-box         : (width, height)의 크기 = 컨텐츠의 크기+패딩(상하좌우)+테두리(상하좌우)
+
+        
+            -  요소의 타입과 박스모델의 상관관계
+                [Block]
+                - Block 요소의 특징 :  위에서 아래로 쌓이며 다른 요소가 옆으로 오지 못하게 막는다.
+                                                          => 자동으로 화면 끝까지 마진으로 채우게 된다.
+                - Block 요소의 특징을 가진 태그 :  h1, p, ul, li table div....
+                - Block 요소는 박스 모델이 가진 모든 속성(border, padding, margin,width, height...)을 사용 할수 있다.
+                - Block 요소의 높이는 따로 지정하지 않으면 자식요소의 높이의 합으로 결정
+
+                [Inline]
+                - Inline 요소의 특징 :  텍스트 작성하듯 왼쪽에서 오른쪽으로 요소를 채워나가는 방식으로 화면을 구성
+                - Inline 요소의 특징을 가지는 태그 : a img span strong br input...
+                - Inline 요소는 박스 모델이 가진 높이에 관련된 속성(width, height, top, bottom~~)을 사용할 수없다.
+
+                요소의 타입은 변경이 가능 : display
+                 - display : block
+                 - display : Inline
+                 - display : inline-block
+                    - Inline의 특성 : 가로배치를 사용 가능
+                    - Block의 특성  : 박스모델의 속성을 사용 가능
+
+
+        */
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        div{
+            box-sizing: border-box;
+            width: 300px;
+            height: 300px;
+            background-color: yellowgreen;
+            border: 3px solid black;
+            padding: 50px;
+            /* 박스의 가로 크기 = 300+3+50+3+50 = 406 */
+            /* 우리가 원하는 박스의 크기 : 400 */
+
+            /* border-style : solid dotted double dashed;
+            border-color : red   blue;
+            border-width : 3px; */
+            /* border-top-left-radius:50px  150px;
+            border-top-right-radius: 100px; */
+            /* border-radius : 150px; */
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+</body>
+</html>

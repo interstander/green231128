@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            화면 레이아웃의 첫걸음 : float (띄우다)
+            - float 속성을 block요소를 가로 배치 하고 싶을 때 사용
+
+        **********[속성의 상속]
+                    - 부모요소에 선언된 속성값을 자식 요소가 별도로 선언하지 않으면 자동으로 상속되어 사용된다.
+                    (용어 : cascading)  = Cascading Style Sheet : CSS
+
+            -  float 속성을 부여하면 
+               -> 해당 요소는 화면 위로 떠오르듯이 동작
+               -> 해당 요소는 부모요소 내부에 없는 것 처럼 취급
+               -> 해당 요소는 원래 어떤 display 속성을 가지든 block으로 변환(마진 없는 block 요소)
+
+            - float 속성의 본래적 용도와 의미
+
+
+        */
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 1000px;
+        }
+        .parent{
+            width:500px;
+            margin: 0 auto; /*좌우 마진을 똑같이 맞춰서 가운데 배치*/
+            background-color: gray;
+        }
+        .parent::after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .child{
+            width:200px;
+            height: 200px;
+            color: black;
+            text-align: center;
+            line-height: 200px;  /*텍스트의 위아래 가운데 배치*/
+            font-size: 30px;
+            font-weight: 700;
+        }
+        .orange{
+            background-color: orange;
+            float: left;
+        }
+        .yellow{
+            background-color: yellow;
+            float: right;
+        }
+        .green{
+            background-color: green;
+            float: left;
+        }
+        .last{  /*판 역할*/
+            clear: both;
+        }
+        .other{
+            background-color: black;
+            color: wheat;
+        }
+        #overflowhidde{
+            width: 200px;
+            height: 100px;
+            border: 1px solid black;
+            overflow: hidden; /*박스 밖으로 벗어나는 내용은 숨김*/
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child orange">Child</div>
+        <div class="child yellow">Child</div>
+        <div class="child green">Child</div>
+        <!-- <div class="last"></div> -->
+    </div>
+    <div class="other">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    </div>
+    <!-- <div>
+        <img style="float: left;"  src="./[sizedown]mountains.jpg" alt="">
+        <p style="display: inline;">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus qui, ratione saepe commodi perferendis dolorum! Veritatis, temporibus architecto laborum pariatur voluptatum adipisci aliquam itaque rerum! Ipsum odio veritatis mollitia doloremque!
+        </p>
+    </div> -->
+    <div id="overflowhidde">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto minus tempore inventore neque in, eos enim atque nam esse id amet molestias beatae dolores voluptatum repellendus sequi! Corporis, quam veniam?
+    </div>
+</body>
+</html>

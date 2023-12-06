@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            Position 속성 : 각 요소를 화면에 어떤 기준으로 배치할 지 결정하는 속성
+            - static (정적 포지션) : 가장 기본이 되는 정상적인 흐름에 따른 배치
+            - relative (상대 포지션) : 정적 포지션을 기반으로 움직이는 배치
+            - absolute (절대 포지션) : 컨테이너를 원점으로 움직이는 배치
+            - fixed (고정 포지션) : 뷰포트를 원점으로 움직이는 배치
+
+            1. 정적 포지션 :  아무 설정이 없을 때 기본적으로 배치되는 포지션
+
+            2. 상대 포지션 : 해당요소의 정적 위치를 기반으로 위치를 이동시킬수 있다.
+                => 원래 위치에 요소가 있는 상태이고 요소가 보이는 위치가 변경
+
+            - 요소를 움직는 방법
+                top, bottom, left, right
+
+            3. 절대 포지션 : 해당 요소의 부모 위치를 기반으로 위치 이동시키는 방법
+                => 부모요소가 static이 아닐 것
+                => float하고 유사하게 실제 요소가 이동
+
+            4. 고정 포지션 : 뷰포트(보이는 화면)을 기반으로 위치를 이동시키는 방법
+
+
+            - 요소의 높이 : 먼저 나온 태그가 위로 올라온다.
+               z-index : 숫자
+                숫자가 작을 수도록 눈에서 멀어지고 숫자가 높을 수록 눈에서 가까워 진다.
+
+        */
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            height: 3000px;
+        }
+        .parent{
+            width:400px;
+            margin: 0 auto; /*좌우 마진을 똑같이 맞춰서 가운데 배치*/
+            background-color: gray;
+            position: relative;
+        }
+        .child{
+            width:200px;
+            height: 200px;
+            color: black;
+            text-align: center;
+            line-height: 200px;  /*텍스트의 위아래 가운데 배치*/
+            font-size: 30px;
+            font-weight: 700;
+        }
+        .orange{
+            background-color: orange;
+        }
+        .yellow{
+            background-color: yellow;
+            position: relative;
+            top:100px;
+            left:100px;
+            z-index: 0;
+
+        }
+        .green{
+            background-color: green;
+            position: relative;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child orange">Child</div>
+        <div class="child yellow">Child</div>
+        <div class="child green">Child</div>
+    </div>
+</body>
+</html>
