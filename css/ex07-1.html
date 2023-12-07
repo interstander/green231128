@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            플렉스 박스 : 부모 요소 입장에서 자식요소들을 정렬시킬때 사용하는 값
+            
+            1. 부모요소에 플렉스박스를 선언 
+               => display : flex  (inline-flex)
+            
+            2. 정렬방식 선택 (가로, 세로)
+               => flex-direction
+                : row (가로), row-reverse, column(세로), column-reverse
+            
+            3. 라인 방식
+                - 자식요소의 길이 합계가 부모요소의 범위를 벗어났을 때 어떻게 할 것인가?
+                    - 부모요소내에 어떻게든 우겨 넣을것인가? (한줄) 
+                    - 줄바꿈을 진행해서 자식요소의 크기를 지키는 상태 (여러줄)
+                => flex-wrap
+                  : wrap (여러줄), nowrap(한줄)  [부모입장]
+
+            정렬 방법 => '축' ->  Main Axis(주축), Cross Axis(교차축)
+
+            각 축을 기준으로 정렬 방식을 선택
+            
+             - Main axis를 기준으로 정렬할 때 사용하는 속성 
+               => justify-content
+                : flex-start,  flex-end, center, space-between, space-around
+
+             - Cross axis를 기준으로 정렬할 때 사용하는 속성
+               => align-items ( 한 줄 )
+                : flex-start, flex-end, center
+
+            - Cross axis를 기준으로 정렬할 때 사용하는 속성
+               => align-content (여러줄)
+                : flex-start, flex-end, center, space-between, space-around
+
+            자식 요소의 정렬 순서를 바꿀 수 있다.
+               =>  order : 숫자  ( 숫자가 낮을 수록 앞선 번호, 숫자가 높을 수록 뒷 번호)
+        
+        */
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .parent{
+            margin: 5px auto 0px auto;
+            width: 650px;
+            height: 650px;
+            background-color: blue;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            /*주축 정렬*/
+            justify-content: space-around;
+            /*교차축 한줄 정렬*/
+            /* align-items: center; */
+            /*교차축 여러줄 정렬*/
+            align-content: space-around;
+        }
+        .child{
+            /* width: 300px;
+            height: 200px; */
+            width: 200px;
+            height: 200px;
+            
+            background-color: aqua;
+            font-size: large;
+            font-weight: 700;
+            text-align: center;
+            line-height: 200px;
+            border: 1px solid black;
+        }
+        .one{ order: 4; }
+        .two{ order: 3; }
+        .three{ order: 1; }
+        .four{ order: 5; }
+        .five{ order: 2; }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="child one">Block1</div>
+        <div class="child two">Block2</div>
+        <div class="child three">Block3</div>
+        <div class="child four">Block4</div>
+        <div class="child five">Block5</div>
+    </div>
+</body>
+</html>
