@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            처리 - 연산자
+
+            '표현식' : 값 그 자체, 결과적으로 어떤 값이 나오게 하는 수식이나 함수
+            '평가값' : 표현식에 의해서 나오는 결과물
+
+            -----------
+            - 산술 연산(사칙연산, 가감승제)
+             +,-,*,/  , %(나머지)
+
+              => 문자열에서는 +이 가능하다
+                 
+
+
+        */
+        // 사칙연산 연습
+        console.log(5+3);  // 8
+        console.log(5-3);  // 2
+        console.log(5*3);  // 15
+        console.log(5/3);  // 1.666...
+        console.log(5%3);  // 2
+        // 문자열 결합
+        console.log("안녕"+"하세요"); // 안녕하세요 
+
+        // 문자열과 숫자의 결합 => 자동으로 문자열 결합으로 처리
+        console.log("안녕"+12);  // 안녕12
+        console.log("안녕"+12+34); // 안녕1234
+        console.log(12+34+"안녕");  //  46안녕
+
+        // 연산의 우선순위!   ( )가 제일 높다 ,  = 이 제일 낮다.
+
+        // 논리 결합 (*) : 논리 데이터는 산술연산시 true는 1로, false는 0으로 처리
+        console.log(true+1);  //  2
+        console.log(false+1);  //  1
+
+        // 부호연산 + 부호 그대로, - 부호 반대로
+        console.log(+(-10));   // 음수 10의 부호 그대로 출력해서 음수10으로 출력하세요.
+        console.log(-(-10));   // 음수 10의 부호를 반대로 바꿔서 출력해서 양수 10으로 출력하세요.
+
+        // 대입연산 ( = ) 오른쪽의 평가값을 왼쪽 변수에 담으세요!
+        let a1 = 10 + 20;
+        console.log(a1);   // 30
+
+        // 복합 대입 연산 ( +=, -=, *=, /=,  %= ...);
+        let a2 = 10;
+        a2 = a2 + 30;     // a2 안에 있는 데이터를 30 증가시키세요!
+        console.log(a2);  // 40
+        a2 += 20;         // a2 안에 있는 데이터를 20 증가시키세요!
+        console.log(a2);  // 60
+
+        //  증감연산자  ++, -- 
+        let a3 = 10;
+        a3 = a3 + 1;   // a3안에 있는 값을 읽어와서 1을 더한 다음 다시 a3 안에 저장하세요.
+        console.log(a3);  // 11
+        a3 += 1;        // a3 안에 있는 데이터를 1 증가 시키세요.
+        console.log(a3);  // 12
+        a3++;              // a3를 1증가 시키세요.
+        console.log(a3);  // 13
+        ++a3;              // a3를 1증가 시키세요.
+        console.log(a3);  // 14
+
+        // ++a : a에 1을 추가한 후 a값을 평가한다.  : 선증가 후평가
+        // a++ : a값을 평가한 후 1을 추가한다.      : 선평가 후증가
+        let num1 = 5;
+        let result1 = num1++ + 5;  
+        //       1.    5 + 5  => result1 = 10
+        //       2.    6
+        console.log("result1 : "+result1);      // result1 : 10
+        console.log("num1 : "+num1);            // num1 : 6
+
+        let num2 = 5;
+        let result2 = ++num2 + 5;
+        //       1.    6
+        //       2.    6     + 5   => result2 = 11
+        console.log("result2 : "+result2);      // result2 : 11
+        console.log("num2 : "+num2);            // num2 : 6
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            타입(데이터)의 종류 
+             - 원시 자료(실제 데이터)
+                - 숫자(정수, 실수)
+                - 문자 a,b,c, A,B,C....
+                - boolean (논리) : true, false
+                - 특수
+                   - null : 의도적으로 값이 없음 을 표시하는 키워드 
+                   - undefinded : 변수를 선언만 했을 때
+
+             - 참조 자료(주소 )
+                -문자열
+
+
+        - 숫자 : 자바스크립트는 정수와 실수를 나누지 않고 사용
+
+          - 소수점 표기 방법
+            e표기법
+            - 123000000 => 123000000.
+                => 1.23000000 * 100000000
+                => 1.23 * 10^8 =>  1.23e8
+            - 0.0000123 =>  
+                => 1.23 / 100000
+                => 1.23 * 0.000001
+                => 1.23 * 10^-5  => 1.23e-5
+          - infinity : 무한대 => 사칙연산 
+            1/infinity  => 0
+
+          - NaN : 숫자가 아님(계산이 불가능한 경우)
+
+        - 문자 : 전부 유니코드방식 (UTF-8)
+           
+        
+
+        */
+
+        let a1 = 10;
+        console.log(a1);   //a1이라는 변수 안에 데이터를 콘솔화면에 출력하세요.
+        console.log("a1"); // 문자열 a1이라는 글자를 콘솔화면에 출력하세요.
+
+        let a2;  // a2라는 변수를 사용할 겁니다(선언)
+        console.log(a2);   //a2이라는 변수 안에 데이터를 콘솔화면에 출력하세요.
+ 
+        console.log(1/Infinity);  // 0 출력
+
+        // 문자열  "글자의 나열", '글자의 나열'   ("글자의 나열' X)
+
+        let a3 = "안녕하세요";
+        console.log(a3);
+
+        let a4 = true;
+        console.log(a4);
+
+        // 특수한 문자열 템플릿
+        // 1. 백틱 기호 `
+        //    작성된 그대로 출력
+        let a5 = `안녕하세요
+        반갑습니다
+        잘가세요`;
+        console.log(a5);
+        /*
+        안녕하세요
+        반갑습니다
+        잘가세요
+         */
+
+        // 2. 템플릿~홀더(${}) : 변수를 홀더에 추가해서 변수안의 데이터를 문자열에 합쳐서 사용 
+        let b1 = 50;
+        let b2 = 60;
+        let str = `${b1}+${b2}=${b1+b2}`;
+
+        console.log(str);
+
+        //------------------------------------------------------
+        // 변수에 담긴 타입(자료형)알아보기
+        console.log(typeof(str));   //string :문자열
+        console.log(typeof(b1));    //number : 숫자
+        console.log(typeof(true));   // boolean : 논리
+        
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+
