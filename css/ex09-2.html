@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    /*
+        셀에 이름을 붙여서 영역을 지정하는 방법
+    */
+    *{
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .container{
+        margin: 0 auto;
+        font-size: 30px;
+        border: 2px solid black;
+        width: 600px;
+
+        display: grid;
+
+        grid-template-areas: 
+                    "header  header"
+                    " side   main"
+                    "  .       . "
+                    "footer  footer";
+
+    }
+    .item{
+        border: 1px solid black;
+    }
+    .header{grid-area: header;}
+    .side{grid-area: side;}
+    .main{grid-area: main;}
+    .footer{grid-area: footer;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item header">header</div>
+        <div class="item side">side</div>
+        <div class="item main">main</div>
+        <div class="item footer">footer</div>
+    </div>
+</body>
+</html>

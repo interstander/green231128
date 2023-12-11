@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            margin: 0 auto;
+            font-size: 30px;
+            border: 2px solid black;
+            width: 600px;
+
+            /* 그리드 */
+            display: grid;
+/*-------------------------------------------------------------------------------------*/
+            /* 
+                1. 그리드의 구조 속성  
+                    grid-template-columns : 가로 간격 
+                    grid-template-rows    : 세로 간격
+            */
+            /* grid-template-columns: 200px 200px 200px; */
+                                /*  200짜리 + 200짜리 + 200짜리 3칸의 가로 그리드 완성  */
+            /* grid-template-columns: 1fr 2fr 3fr; */
+                                /* fr단위는 비율 */
+            /* grid-template-columns: 100px 1fr 2fr; */
+            /* 첫번째 칸은 가로 100px, 두번째 칸은 첫번째 칸을 제외하고 남은 부분의 1/3,
+                                      세번째 칸은 첫번째 칸을 제외하고 남은 부분의 2/3 */
+
+            /* grid-template-rows:  200px 200px 200px; */
+                                /*  200짜리 + 200짜리 + 200짜리 3칸의 세로 그리드 완성  */
+            /* grid-template-rows:  100px 200px auto; */
+                                /* auto는 남은 부분에 대해서 자동 채움*/               
+
+            /*
+                    (함수) : 부가적인 기능
+                    repeat(반복회수, 반복간격) : 일정 간격을 반복적으로 사용할 때
+                    minmax(최소, 최대) : 최소 크기, 최대 크기를 확보할 공간을 지정
+            */
+            /* grid-template-rows:repeat(3, 200px); 200px 200px 200px */
+            /* grid-template-rows:repeat(3, 1fr);  1fr 1fr 1fr */
+            grid-template-rows:repeat(3, minmax(200px, auto));
+                                /* 세로 갯수 3칸, 최소 200px이상 최대 알아서 채우도록 */
+
+/*-------------------------------------------------------------------------------------*/
+            /* 2. 그리드 셀 간격 - 갭 */
+            /*row와 column 간격을 만드는 속성*/
+            /* column-gap: 20px;
+            row-gap: 10px; */
+
+            /* gap:10px 20px; row 10px, column 20px*/
+
+/*-------------------------------------------------------------------------------------*/
+            /*
+                4. 자동 크기 조정 : 아이템 배치를 통해서 자동으로 셀 개수와 크기를 설정
+
+            */
+            grid-template-columns: 100px; /* 첫번째 셀은 100px 고정*/
+            grid-auto-columns: 1fr 2fr;   /* 두번째부터 만들어진 셀은 1fr 2fr단위로 생성*/
+                                          /* 셀의 개수는 아이템으로 배정된 개수만큼*/
+
+        }
+        .item{
+            border: 1px solid black;
+        }
+        .item:nth-child(1){ /* A */
+            /* 3. 아이템의 영역 : 
+                셀 1칸이 아이템의 영역, 셀 여러칸이 아이템의 영역이 될수 있다.
+                grid-column-start: 번호
+                grid-column-end: 번호 
+
+            */
+            /* grid-column-start: 1;
+            grid-column-end: 3;  1번부터 3번까지 2칸
+            grid-row-start: 1;
+            grid-row-end: 3;     1번부터 3번까지 2칸 */
+
+            /* grid-column: 1 / 3;   1번부터 3번까지 2칸
+            grid-row: 1 / span 2; 1번 부터 2칸! */
+
+            grid-column: 2;  /* 2번부터 1칸*/
+        }
+        .item:nth-child(2){ /* B */
+            grid-column: 3;
+        }
+        .item:nth-child(3){ /* C */
+            grid-column: 4;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item itemA">A</div>
+        <div class="item itemB">B</div>
+        <div class="item itemC">C</div>
+        <div class="item itemD">D</div>
+        <div class="item itemE">E</div>
+        <div class="item itemF">F</div>
+        <div class="item itemG">G</div>
+        <div class="item itemH">H</div>
+        <div class="item itemI">I</div>
+    </div>
+</body>
+</html>

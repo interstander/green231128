@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            그리드 - 아이템 정렬 (플렉스)
+        */
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            margin: 0 auto;
+            font-size: 30px;
+            border: 2px solid black;
+            width: 600px;
+            height: 600px;
+
+            /* 그리드 */
+            display: grid;
+            grid-template-columns: 150px 150px 150px;
+            grid-template-rows:  150px 150px 150px;
+            
+            /*아이템 정렬하기*/
+            /* 
+                컨테이너에서 전체 아이템을 대상으로 정렬 : 일괄 적용
+                - 셀 안에서 각 아이템이 어떻게 정렬되는가?
+                각 아이템의 정렬 방향
+                세로축 정렬 : align-items;
+                가로축 정렬 : justify-items;
+                : start, center, end;
+
+            */
+            /* align-items: center;
+            justify-items:center; */
+            /*
+                - 아이템 그룹 단위 정렬하기 : 아이템의 크기의 합이 컨테이너보다 작을 때 
+                세로축 : align-content;
+                가로축 : justify-content;
+                : start, center, end , space-around, space-between; 
+            
+            */
+            align-content:start;
+            justify-content:end;
+            
+
+        }
+        .item{
+            border: 1px solid black;
+
+
+        }
+        .item:nth-child(1){
+            /*개별 셀 안에서 아이템 위치 */
+            /*
+                세로축 : align-self:
+                가로축 : justify-self:
+            */
+            /* align-self: start;
+            justify-self: end; */
+
+            /* 각 아이템 의 보이는 순서 재정리 : order : 숫자가 낮을 수록 먼저 */
+            order:3;
+        }
+        .item:nth-child(2){
+            order:2;
+        }
+        .item:nth-child(3){
+            order:1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item itemA">A</div>
+        <div class="item itemB">B</div>
+        <div class="item itemC">C</div>
+        <div class="item itemD">D</div>
+        <div class="item itemE">E</div>
+        <div class="item itemF">F</div>
+        <div class="item itemG">G</div>
+        <div class="item itemH">H</div>
+        <div class="item itemI">I</div>
+    </div>
+</body>
+</html>
