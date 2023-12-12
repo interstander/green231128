@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            점프문 : 특정 코드를 만나면 지정된 위치로 바로 이동하는 코드
+            (C : goto문)
+            보통 사용하는 점프문 : break, continue, return, throw 가 있다!
+
+            => break, continue
+
+            주로 반복문내부에 사용
+            - [공통] 반복문 중단해라 
+            - break : 반복문을 중단하고 빠져나와라!
+            - continue : 반복문을 중단하고 다시 조건을 확인하러 가세요!
+
+
+        */
+        // 예시 1부터 5까지 출력하는 반복문
+        for(let i=1;i<=5;i++){
+            console.log(i);
+        }
+        // i가 3일때 break를 거세요.
+        console.log('break');
+        for(let i=1;i<=5;i++){
+            if(i==3){
+                break;
+            }
+            console.log(i);
+        }
+        // i가 3일때 continue를 거세요.
+        console.log('continue');
+        for(let i=1;i<=5;i++){
+            if(i==3){
+                continue;
+            }
+            console.log(i);
+        }
+
+//-----------------------------------------------------------------------------
+        // 이중 반복문 = 구구단
+        
+        for(let i=1;i<=5;i++){
+            for(let j=1;j<=5;j++){
+                if(j==3)break;
+                console.log(i+":"+j);  
+            }
+        }
+
+        // 반복문이 여러개 중첩 되어 있는 경우
+        // 반복문을 중단할 대상을 선택해야 하는데 이때 사용하는 것이 레이블
+        console.log("레이블링!!");
+        outerLoop:
+        for(let i=1;i<=5;i++){
+            innerLoop:
+            for(let j=1;j<=5;j++){
+                if(j==3)break outerLoop;
+                console.log(i+":"+j);  
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

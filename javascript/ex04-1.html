@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            조건문 : 조건에 따라 실행순서를 다르 진행하는 것
+            if(명제,비교,논리){
+                평가값이 true인 경우 실행될 영역!
+            }else{
+                평가값이 false인 경우 실행될 영역!
+            }
+        
+        */
+        let score = 55;
+
+        if(score >= 60){
+            console.log("합격입니다.");
+        }else{
+            console.log("불합격입니다.");
+        }
+
+        // 조건이 여러개인 경우
+        // 요금 예시
+        let age = 7;
+        if(age >= 65){
+            console.log("노인 무료");
+        }else{
+            // 나이가 65 미만인 사람들
+            if(age >= 20){ // 나이가 20 이상인 사람(&& 나이가 65 미만인 사람!)
+                console.log("성인 요금");
+            }else{
+                // 나이가 20 미만인 사람
+                if(age >= 13){ //  나이가 13세 이상인 사람 (&& 나이가 20세 미만인 사람!!&& 나이가 65 미만인 사람!)
+                    console.log("청소년 요금");
+                }else{
+                    // 나이가 13세 미만인 사람
+                    if(age >= 8){ // 나이가 8세 이상인 사람
+                        console.log("어린이 요금");
+                    }else{
+                        // 나이가 8세 미만인 사람
+                        console.log("유아 무료");
+                    }
+                }
+            }
+        }
+
+        // 조건이 여러개인 경우 보다 간결하게 표시하기 위해서 else if문
+        if(age >= 65){
+            console.log("노인 무료");
+        }else if(age >= 20){
+            console.log("성인 요금");
+        }else if(age >= 13){
+            console.log("청소년 요금");
+        }else if(age >= 8){
+            console.log("어린이 요금");
+        }else{
+            console.log("유아 무료");
+        }
+
+    //-------------------------------------------------------------------
+        // 조건문 : 
+        // switch~case : 특정 변수의 값이 지정된 값과 일치하는 지 여부에 따라 진행 방향을 결정하는 방식
+        /*  switch(표현식,변수){
+            case 데이터1 : 실행문1;
+            case 데이터2 : 실행문2;
+            ...;
+            case 데이터3 : 실행문3;
+            default : 실행문99;
+            }
+
+        */
+        let lang = "javascript";
+
+        switch(lang){
+        case "java" : 
+            console.log("이것은 자바입니다.");
+            break;
+        case "python" : 
+            console.log("이것은 파이썬입니다.");
+            break;
+        case "javascript" :
+            console.log("이것은 자바스크립트입니다.");
+            break;
+        case "kotlin" : 
+            console.log("이것은 코틀린입니다.");
+            break;
+        default :
+            console.log("이것은 기타 언어 입니다.");
+        }
+
+        // case마다 break를 만들 필요는 없다!!
+        // 3월부터 5월까지 봄
+        // 6월부터 8월까지 여름
+        // 9월부터 11월까지 가을
+        // 12월부터 2월까지 겨울
+        let month = "5월";
+        switch(month){
+        case "3월":
+        case "4월":
+        case "5월":
+            console.log("봄입니다.");
+            break;
+        case "6월":
+        case "7월":
+        case "8월":
+            console.log("여름입니다.");
+            break;
+        case "9월":
+        case "10월":
+        case "11월":
+            console.log("가을입니다.");
+            break;
+        case "12월":
+        case "1월":
+        case "2월":
+            console.log("겨울입니다.");
+            break;
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
+
+
+
