@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 함수 : 하나의 기능을 수행하기 위한 코드의 덩어리
+
+        //함수를 만들기 위해 필요한 내용
+        //   - 동작이 필요한 순간에 사용하기 위한 '이름' =>  '이름'  =>호출
+        //   - 동작을 위해서 집어 넣어야할 데이터        =>  매개값 (파라미터)
+        //   - 동작이 진행된 후 얻어지는 결과 데이터     =>  반환값  (리턴 값)
+     
+    //  function : 함수를 생성하기 위한 키워드
+    //  greeting : 이름
+    //  {~~~~}   : 실제 동작하게 될 기능 영역
+        function greeting(){
+            console.log("안녕하세요!");
+        }
+
+        greeting();  // 함수의 이름을 호출!!
+
+        // 1. 이름
+        //      이름 짓는 법
+        //      - 같은 이름을 가진 함수가 존재하면 안된다.
+        //      - 첫글자는 무조건 소문자, camel case(낙타 체)로 작성해야 한다.(변수 이름 짓는 법과 동일)
+        //                                  
+        //      - 가급적 기능을 이해하기 쉽도록 이름을 지어야 한다(약자 X)
+        //      - 함수는 하나의 기능을 나타내는 단위이므로 주로 동사, 동사로 시작되는 단어로 이름 짓는다.
+
+        // 2. 매개값 (인자) : 매개값은 있을 수도 있고, 없을 수도 있고, 여러개 일수도 있다...
+        function squareArea(num){ 
+                          // 매개변수 : 함수 내에서 매개값을 저장하기 위해 사용하는 변수  
+            console.log("넓이 : "+(num*num));
+        }
+        squareArea(7);  // 함수를 호출할 때 넣어주는 데이터 :  매개값(인자)
+        
+        function lecArea(width,height){
+            console.log("넓이 : "+(width*height));
+        }
+
+        lecArea(7,3); 
+
+        //  3. 반환값  :  함수가 종료되고 난 후 결과로서 데이터
+        function square(num){
+            return (num*num);  // return : 함수를 종료하세요. / return 데이터 : 함수를 종료하고 데이터를 내보내세요.
+        }
+
+        let areaResult = square(5);  //함수의 결과를 변수에 담아서 활용 가능
+        console.log(areaResult);
+
+        if(square(3) < 10){
+            console.log('사각형의 넓이는 10보다 작다.');
+        }
+
+        //---------------------------------------------------------------------------
+        //  - 함수의 실행 흐름
+        //     1) 함수의 이름을 호출
+        //     2) 호출한 함수에 인수(매개값)를 파라미터(매개변수)로 전달
+        //     3) 함수 내부의 코드가 순서대로 동작
+        //     4) return이 없다면 함수의 끝에 도달하고 원래 코드로 돌아온다.(undefied가 반환됨)
+        //     5) return이 있다면 그 즉시 함수를 종료하고 반환값을 가지고 원래 코드로 돌아온다.
+
+        //  -  함수를 데이터로서 사용할 수도 있다.
+        function check(){
+            return 10;
+        }
+
+        let result1 = check();
+        console.log(result1);  // 함수가 동작되고난 반환값인 10이 출력
+        
+        let result2 = check; 
+        console.log(result2);  // 함수 그 자체를 의미한다.(함수 복제)  func~~~  출력
+        console.log(result2());  // result2가 마치 자기 함수인것 처럼 사용할 수 있다.
+
+        //    -  이름 없는 함수를 만들어 사용하는 것도 가능
+        let test1 = function(x,y){
+                        return x*y;
+                    }
+        
+        // - 변수의 범위
+        //    {}내부에 선언된 변수는 {}내부에서만 사용가능.  : 로컬 변수
+        //    {}외부에 선언된 변수는 어디서나 사용 가능하다. : 전역 변수
+
+        let variA = 10;
+        function funcF(){
+            let variB = 20;
+            console.log("variA : "+variA);  // 10
+            console.log("variB : "+variB);  // 20
+        }
+
+        funcF();   //  호출시 -> 내부 출력문의 출력 시점
+        console.log("variA : "+variA);  // 10
+        console.log("variB : "+variB);  // variB?? 모르는데? 에러
+
+        // 미니 과제
+        // 구구단을 출력하는 함수를 만들어 봅시다.
+        //   - 숫자를 넣으면 해당 숫자에 대한 구구단을 출력하는 함수
+        function gugudan(dan){
+
+        }
+
+        gugudan(5);  // 5단 출력
+        gugudan(7);  // 7단 출력
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
