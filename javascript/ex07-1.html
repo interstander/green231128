@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            객체(object) : 하나의 사물, 대상!
+            
+            객체를 이렇게 사용하는 거구나!!
+
+            자바스크립트에서 다루는 데이터 
+              - 원시타입 : 
+              - 참조타입 : 원시가 아닌 모든 데이터 ( : 객체) ;
+
+            *** 객체는 데이터;
+                  => 어떤 데이터인가? 다수의 데이터 => 하나의 사물을 구성하는 데이터들의 묶음!!!  
+            
+            객체를 이루는 각각의 데이터는 어떤 의미를 가지는가? (배열하고의 차이점)      
+            각각의 데이터는 key : value 형태의 묶음으로 존재 
+        */
+
+        let human = {name:"홍길동",age:25,job:"도적"};
+        //  객체의 정보는 key:value  => 프로퍼티
+        //  객체 내부의 데이터를 알아오는 방법 : 멤버접근연산자 ( . )
+        console.log(human.name);
+
+        //  데이터
+        // 1. 객체 생성하는 방법
+        let obj = {};   //  빈 객체 생성
+
+        // 2. 객체에 데이터 삽입 방법 
+        obj.name = "로미";   // 프로퍼티 생성=> name:"로미"; 
+        obj["age"] = 15;     // 프로퍼티 생성=> age:15;
+        console.log(obj);
+
+        //  3. 객체에 데이터 변경 방법
+        obj.name = "고길동";  //  기존의 프로퍼티가 존재 -> 데이터만 교체;
+        obj["age"] = 45; 
+        console.log(obj);
+
+        // 4. 객체의 개별 데이터를 조회
+        obj.age += 1; 
+        console.log("나이 : "+obj["age"]);
+        
+        // 5. 객체의 개별 데이터 삭제
+        delete  obj.name;
+        console.log(obj);  
+
+        // 6. 프로퍼티가 존재하는지 확인하는 연산자  in   =>  true, false
+        console.log("age" in obj);
+        console.log("name" in obj);
+
+        //---------------------------------------------------------------------------------
+        // 참조 변수 : 저장할 수 없는 큰 데이터를 의미 
+        //                 => 데이터가 저장된 위치(주소)만 저장 
+        //
+
+        let student = {name:"박길동",stuNo:32};
+        let a = student;  //주소만 복사된다.
+
+        a.name = "이길동";
+        console.log("a.name :"+a.name);
+        console.log("student.name : "+student.name);
+
+        let num1 = 10;
+        let num2 = num1;
+        num2 += 5;
+
+        console.log("num1 : "+num1);
+        console.log("num2 : "+num2);
+
+
+    </script>
+</body>
+</html>
