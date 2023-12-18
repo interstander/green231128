@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 내장 객체 <= 자바스크립트 엔진이 제공하는 기본 객체
+        // Math : 수학 관련 기능을 가진 객체
+        // Date : 날짜 관련 정보와 기능을 가진 객체
+        let t = new Date();  // 브라우저의 현재 시간
+        console.log(t.getTime());
+        let then = new Date(2023,1,1);  //  23년 1월 1일이라는 날짜 정보를 가지는 객체 생성
+        console.log(then);
+
+        //     시간 계산에도 사용!
+        let start = new Date();   // 연산전 시간 측정
+        for(let i=0;i<100000000;i++){
+        }
+        let end = new Date();     // 연산후 시간 측정
+        console.log("1억번 반복시 걸리는 시간 : "+(end-start));
+
+        // String :문자열 관련 기능을 가진 객체
+
+        let str = "Hello My friends!!";
+        //    문자열의 각 문자는 인덱스 번호를 기반으로 저장된다.
+        console.log(str[4]);
+
+        //  concat() : 문자열 결합시 사용하는 메서드
+        let a = "cup";
+        let b = "Cake";
+        let result1 = a.concat(b);  //  문자열 a에 문자열 b를 결합한 결과를 result1에 저장
+        console.log(result1);   //  = a+b
+
+        //  trim()  : 문자열의 좌우 공배을 제거하는 메서드
+        let c = "    password    ";   // 만약 저장된 암호  "password";
+        let result2 = c.trim();
+        console.log(c+":"+result2); 
+
+        //  slice()  : 문자열 잘라내기 
+        let d = "slice Test";
+        let result3 = d.slice(0,7);
+        console.log(result3);   // slice T
+
+        //  split();  : 문자열 쪼개기 => 배열
+        let names = "김가령:이승민,김관훈:이정희,김대정:전소영,김주현:전현민";
+        let result4 = names.split(":"); // ["김가령","이승민,김관훈","이정희,김대정","전소영,김주현","전현민"]
+        let result5 = names.split(","); // ["김가령:이승민","김관훈:이정희","김대정:전소영","김주현:전현민"]
+        console.log(result4);
+        console.log(result5);
+
+
+        // - Array 배열 : 배열 관련 기능을 가진 메서드로 만든 객체
+
+        // (1) forEach( f )  :  배열에 각 요소에 함수를 적용하는 메서드
+        let games = ["리그오브레전드","오버워치","배틀그라운드","귀혼","리니지","워크래프트"];
+        // 각 게임이름의 글자수를 배열에 저장하고 싶다.
+        
+        let gameNums = [];
+        //[고전] 기존의 반복문을 이용한 방법
+        for(let i=0;i<games.length;i++){
+            let num = games[i].length;
+            gameNums.push(num);
+        }
+        console.log("고전 반복문 이용법 : "+gameNums);
+
+        
+        //[신규] forEach()메서드를 이용한 반복 적용
+        gameNums = [];// 초기화
+        //   1번째 방법 : 기능 함수를 만들어서 적용
+        games.forEach(numsCheck);
+        function numsCheck(item){  // 각각의 요소에 적용한 기능
+                        // 배열의 각 요소 데이터가 item에 들어와서 사용됨
+            gameNums.push(item.length);
+        }
+        console.log("forEach에 함수를 전달하는 방법 : "+gameNums);
+        
+        gameNums = [];// 초기화
+        //   2번째 방법 :  이름없는 함수를 매개데이터로 전달하는 방법
+        games.forEach(function(item){
+                        gameNums.push(item.length); 
+                     });
+        console.log("forEach에 이름없는 함수를 전달하는 방법 : "+gameNums);
+        
+        gameNums = [];// 초기화
+        //   3번째 방법 :  화살표 함수를 매개데이터로 전달하는 방법
+        games.forEach((item)=>{gameNums.push(item.length);});
+        console.log("forEach에 화살표 함수를 전달하는 방법 : "+gameNums);
+
+        // (2) find() 배열의 요소중 조건(함수)에 일치하는 것을 찾는 메서드
+        //  글자수가 4글자 미만인 요소를 출력하세요.
+        let result6 = games.find(fourNameGame);  //귀혼
+
+        function fourNameGame(item){
+            return item.length < 4;
+        }
+        console.log(result6);
+
+        // (3) map() : 배열의 각 요소에 함수를 적용한 결과를 새로운 배열을 반영해서 반환하는 메서드
+        let result7 = games.map(function(item){return item.length;});
+
+        console.log(result7);
+
+        // (4)  filter() : 배열의 각 요소에 함수를 적용한 결과 true가 나오는 요소들만 따로 배열로 반환하는 메서드
+        // 게임 이름이 4개 초과인 게임들을 반환하세요.
+        let result8 = games.filter((item)=>{return item.length > 4;});
+
+        console.log(result8);
+
+        //  (5) reduce()  : 배열의 요소를 함수에 따라 연산하여 하나의 결과를 만들어내는 메서드
+        //  게임이 이름이 가장 긴 게임 이름을 반환하세요.
+        let gameName =  games.reduce(nameCheck);
+
+        function nameCheck(item1, item2){
+            return (item1.length > item2.length)?item1:item2;
+        }
+        console.log("가장 긴 게임이름 : "+gameName);
+
+
+    </script>
+</body>
+</html>

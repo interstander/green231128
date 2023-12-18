@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="openWindow()">새창 열기</button>
+    <button type="button" onclick="closeWindow()">새창 닫기</button>
+    <button type="button" onclick="resizeWindow()">새창 크기변경</button>
+    <button type="button" onclick="moveWindow()">새창 위치변경</button>
+    <script>
+        // window 객체
+        //  모든 객체의 상위 객체 (조상 객체)  
+        //  => window 객체 없이 동작되는 객체는 존재하지 않는다.
+        //  => window 객체는 생략이 가능하다.
+
+        window.alert("경고창");
+
+        let w;
+        function openWindow(){ // 새창 열기
+            // window.open("주소","창의 이름","옵션");
+            w = window.open("","naver","width=200px, height=200px,status=false");
+        }
+        function closeWindow(){// 새창 닫기
+            w.close();
+        }
+        function resizeWindow(){  //새창 크기 변경
+            //  resizeBy(); 현재 내 크기에 추가로 변경
+            //  resizeTo(); 절대 크기로 변경
+            w.resizeTo(500,500);  
+        }
+
+        function moveWindow(){ // 새팡의 위치 변경
+            // moveBy();  현재 내 위치를 기준으로 이동
+            // moveTo();  화면의 절대 위치로 이동
+            w.moveTo(400, 500);
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
