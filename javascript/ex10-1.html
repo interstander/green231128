@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 HTML문서</title>
+    <style>
+        .black{
+            color: white;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title" onclick="reverse()">안녕하세요</h1>
+    <p id="check">내 이름은 <strong>홍길동</strong> 입니다</p>
+    <img id="img">
+    <ul>
+        <li>탕수육</li>
+        <li>피자</li>
+        <li>햄버거</li>
+        <li>제육덮밥</li>
+        <li>우동</li>
+    </ul>
+    <script>
+        function reverse(){
+            let h = document.getElementById('title');
+            h.classList.toggle('black');
+            // if(!h.classList.contains('black')){
+            //     h.classList.add('black');
+            // }else{
+            //     h.classList.remove('black');
+            // }
+        }
+    </script>
+</body>
+
+</html>
+<!-- 요소들의 가족관계    => 노드 : 트리를 구성하는 각각의 객체들을 노드라고 한다.
+                                (요소 != 노드)  요소 : 시작태그와 끝태그로 이루어진 덩어리!
+                                               노드 : 요소 + 각 텍스트+ 주석등등...
+    - 부모, 자식, 형제  => 프로퍼티
+      => '나'
+    
+    나.parentNode   부모 노드
+    나.childNodes  (배열) 모든 자식 노드
+    나.firstChild   첫번째 자식 노드
+    나.lastChild    마지막 자식 노드
+    나.nextSibling      동생노드
+    나.previousSibling  형 노드
+    나.nodeType         내가 어떤 노드인지(1 요소, 2 텍스트..)
+
+    노드는 사용하기 불편함!!
+    요소만을 타겟으로 하는 프로퍼티를 주로 이용!
+    
+    나.parentElement       부모 요소
+    나.children            모든 자식 요소 (배열)
+    나.firstElementChild   첫번째 자식 요소
+    나.lastElementChild    마지막 자식 요소
+    나.nextElementSibling  같은 부모를 가진 동생 요소
+    나.previousElementSibling  같은 부모를 가진 형 요소
+
+
+--------------------------------------------------------------------------------
+    자바스크립트로 HTML문서를 제어를 한다.
+    1. 제어할 태그 요소를 알아와야 한다. 
+      - 간접 : 이미 알고 있는 요소를 기준으로 찾아가는 것.
+    
+      - 직접 : 
+        - 태그이름   : document.getElementsByTagName('태그이름');
+        - Id속성     : document.getElementById('id값');
+        - class속성  : document.getElementsByClassName('class값');
+        - name 속성  : document.getElementsByName('nama속성값');
+        - CSS 선택자 :  - document.querySelector('선택자');  첫번째로 나오는 1개만 타겟
+                       - document.query.SelectorAll('선택자'); 검색된 모든 요소 타겟
+
+    1-2. [폼, 입력요소] 폼요소 또는 입력요소 객체를 알아오기
+        - name속성을 이용한 방법
+
+        <form   name="frm" >
+        
+        - document.forms.frm   => name속성이 frm인 폼태그가 선택
+
+        - document.forms.frm.check  =>  name속성이 frm인 폼태그가 선택, name속성이 check인 입력요소가 선택
+        
+    
+
+    2. 태그요소의 내용(컨텐츠)를 변경/ 조회
+        - innerHTML : 요소의 컨텐츠를 가지는 프로퍼티
+            -> 코드요소도 문자열로 처리가 가능
+        - textContent : 요소의 컨텐츠를 텍스트로 처리하는 프로퍼티
+            ->  모든 코드 요소를 텍스트로 처리 
+
+    3. 각 요소의 속성(프로퍼티)를 제어하는 메서드(일반적)
+        1) 속성 부여하기 : 요소객체.setAttribute(속성이름,속성값);   // 같은 속성 이름이 없다면 추가
+               자바스크립트에서 통제하기 위한 목적의 속성도 부여가 가능하다
+        2) 속성 변경하기 : 요소객체.setAttribute(속성이름,속성값);  // 같은 속성 이름이 있다면 변경
+        3) 속성 삭제하기 : 요소객체.removeAttrinute(속성이름);     // 해당 속성을 삭제
+        4) 속성의 존재여부 파악 : 요소객체.hasAttribute(속성이름);  // 해당 속성이 있는 여부만 판단
+        5) 속성의 값 조회 : 요소객체.getAttrinute(속성이름);        // 속성 값 읽어오기
+
+    3-1. [스타일:style]
+        => 일반 속성을 작성하듯이 적용할수 있다. 그러나 속성값이 여러개인 경우 작성하기 불편한 점이 있으므로 
+           일반적인 속성 작성과 다른 방식으로 속성을 부여할 수 있다.
+        
+        - 요소객체.style.프로퍼티="값";
+          ex) p.style.color="blue";
+
+          => 스타일 프로퍼티 이름 작성 방법(하이픈(-)를 지우고 뒷단어의 첫글자를 대문자)
+            원래 스타일 속성이름 : background-color
+            자바스크립트에서 사용하는 속성이름 : backgroundColor
+          ex) p.style.background-color  (X)
+              =>p.style.backgroundColor = "black";
+
+    3-2  [클래스 : class]
+        => 한번에 다수의 속성값을 저장할 수 있다! => 일반적인 속성 제어방법으로는 불편하다.
+
+        - 요소객체.classList 
+             => 클래스속성에 적용된 값들을 배열 형태로 사용이 가능하다.
+
+        - 전용 메서드 존재
+            => add(클래스값) : 클래스 값을 추가
+            => remove(클래스값) : 클래스 값 제거
+            => contains(클래스값) : 클래스 값이 있는지 판단
+            => toggle(클래스값) : 클래스값이 있으면 삭제, 없으면 추가
+
+
+
+
+
+
+
+    -->
+
+
+
+
+
