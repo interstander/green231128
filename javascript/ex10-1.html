@@ -22,6 +22,24 @@
         <li>제육덮밥</li>
         <li>우동</li>
     </ul>
+
+    <form action="#" name="frm1" id="frm2">
+        이름 : <input type="text" name="username1" id="username2" class="a"><br>
+        취미 : <input type="checkbox" name="hobby" id="hobby"><br>
+        반 : <input type="radio" name="ban" id="ban"><br>
+        직업 : 
+        <select name="job" id="job">
+            <option value="">백엔드</option>
+            <option value="">프론트엔드</option>
+            <option value="">풀스택</option>
+        </select>
+        <br>
+        하고 싶은 말 : <br>
+        <textarea name="wish" id="wish" cols="30" rows="10">  </textarea>
+        <br>
+        <button type="button">버튼</button>
+    </form>
+
     <script>
         function reverse(){
             let h = document.getElementById('title');
@@ -70,20 +88,40 @@
         - 태그이름   : document.getElementsByTagName('태그이름');
         - Id속성     : document.getElementById('id값');
         - class속성  : document.getElementsByClassName('class값');
-        - name 속성  : document.getElementsByName('nama속성값');
+        - name 속성  : document.getElementsByName('name속성값');
         - CSS 선택자 :  - document.querySelector('선택자');  첫번째로 나오는 1개만 타겟
                        - document.query.SelectorAll('선택자'); 검색된 모든 요소 타겟
 
     1-2. [폼, 입력요소] 폼요소 또는 입력요소 객체를 알아오기
-        - name속성을 이용한 방법
+        1) name속성을 이용해서 폼 태그요소를 객체로 가져오기  => [name:value]
 
         <form   name="frm" >
-        
-        - document.forms.frm   => name속성이 frm인 폼태그가 선택
 
-        - document.forms.frm.check  =>  name속성이 frm인 폼태그가 선택, name속성이 check인 입력요소가 선택
+        폼 요소 선택하기
+        - document.forms.frm   => name속성이 frm인 폼태그가 선택
+        - document.forms.frm   => id속성이 frm인 폼태그가 선택
+
+
+        - document.forms.frm.check  =>  name속성이 frm인 폼태그가 선택, 
+                                        name속성이 check인 입력요소가 선택
+        - document.forms.frm.check  =>  name속성이 frm인 폼태그가 선택, 
+                                        id속성이 check인 입력요소가 선택
+
+        2) 가져온 입력 요소(input) 내부에 작성된 내용 읽어오기=> value
+        document.forms.frm.check.value;  입력요소내부에 작성된 '값'을 읽어온다.
+
+        document.forms.frm.check.value = '데이터'; 
+               =>입력요소내부에 작성된 '값'을 '데이터'로 변경한다.
+
+        3) textarea 내부에 작성된 내용 읽어오거나, 변경하기 => value
+            - innerHTML로 읽어오거나 변경 불가
+
+        4) checkbox, radio  체크가 되었는가? 아닌가?  => checked :  t/f
+              true : 체크됨  / false : 체크 안됨
+            => 변경도 가능
         
-    
+        5) selelct ~ option 몇번째 옵션이 선택되었는가?  => selectedIndex  : 번호
+            
 
     2. 태그요소의 내용(컨텐츠)를 변경/ 조회
         - innerHTML : 요소의 컨텐츠를 가지는 프로퍼티

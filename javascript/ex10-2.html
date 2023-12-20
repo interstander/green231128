@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrap">
+        <p id="hello1">반갑습니다1</p>
+        <p id="hello2">반갑습니다2</p>
+        <p id="hello3">반갑습니다3</p>
+        <p id="hello4">반갑습니다4</p>
+        <p id="hello5">반갑습니다5</p>
+    </div>
+    <script>
+        /*
+            없는 HTML요소를 생성해서 끼워 넣는 방법
+            - 노드 생성하기
+                createElement('요소이름') :  요소 노드가 생성
+                ex) document.createElement('p');    <p></p>
+                createAttirute('속성이름') :  속성 노드 생성
+                createTextNode('텍스트') :  문자열 노드가 생성
+                createComment('주석') :  주석 노드가 생성
+
+
+            - 생성된 노드를 화면에 끼워 넣어야 한다.
+                부모요소의 자식요소로서 삽입이 진행됨
+                부모요소.appendChild(삽입할 노드);
+                    => 부모 요소의 마지막 노드로 삽입
+
+                -> 중간에 끼워 넣고 싶을 때;
+                부모요소.insertBefore(삽입할 노드, 대상 노드);
+                    => 부모요소의 자식이지만 대상노드보다 앞선 위치에 삽입
+
+            - 이미 화면에 존재하는 노드를 삭재하는 방법
+                부모요소.removeChild(삭제하고싶은 자식 노드);
+
+            - 이미 화면에  존재하는 노드를 새로운 노드로 변경하는 방법
+                부모요소.replaceChild(새로운노드, 변경하고자하는 노드);
+
+            
+        */
+
+    </script>
+</body>
+</html>

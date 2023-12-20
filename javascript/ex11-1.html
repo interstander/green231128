@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="exit()">타입아웃 종료</button>
+    <button type="button" onclick="hello()">인사 시작</button>
+    <button type="button" onclick="clearHello()">인사 종료</button>
+    <script>
+        /*
+            window객체의 부가 기능
+            1) 모달창
+                - alert(경고창);    확인 버튼만 누르면 제어권이 다시 화면으로 돌아오는 경고창
+                - confirm(선택장);  확인(true), 취소(false)버튼의 반환값을 반환하는 확인창
+                - prompt(입력창);   문자열 데이터를 입력받기 위한 입력창
+            
+            2) 콘솔 : 브라우저의 콘솔 출력을 돕는 기능을 가진 객체
+                - 프로그램의 동작여부 확인, 디버깅 등 사용
+            
+                - 텍스트 출력문
+                  log();    일반 로그문 출력
+                  error();  에러메시지 출력
+                  warn();   경고메시지 출력
+                  dir();    객체 정보를 풀어서 출력
+
+                - 시간 측정용
+                  time(이름);   시간 측정용 타이머 시작
+                  timeEnd(이름);  같은 이름을 가진 타이머을 정지후 결과 출력
+
+            3) 타이머 => 이벤트
+               일정 시간이 흐른 후에 어떤 동작으로 하도록 하는 기능
+
+               setTimeout(함수,시간) : 실행후 입력한 시간(ms)이 흐른 후 함수 동작
+
+               setInterval(함수, 시간); : 지정된 시간이 흐를때 마다 함수가 동작;
+
+        */
+
+        let a = window.setTimeout(function(){
+                        alert(new Date());
+                },5000);
+
+        function exit(){
+            window.clearTimeout(a);
+        }
+
+        let b;
+
+        function hello(){
+            b = window.setInterval(function(){
+                alert('안녕하세요');
+            },3000);
+        }
+
+        function clearHello(){
+            window.clearInterval(b);
+        }
+
+
+
+
+    </script>
+</body>
+</html>
