@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .vBox{
+            display: inline-block;
+            position: absolute;
+            padding: 10px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>박스 옮기기</h2>
+
+    <script>
+        window.onload=function(){
+            let box = document.createElement('div');
+            box.classList.add('vBox');
+            box.innerHTML = "나를 옮겨주세요!";
+
+            document.body.appendChild(box);
+
+            let boxOffsetX, boxOffsetY;
+            box.addEventListener('mousedown',function(event){
+                // 마우스로 박스를 눌렀을 때 이벤트 발생
+                document.addEventListener('mousemove',boxMoveListener,false);
+                boxOffsetX = event.offsetX; // 마우스를 눌렀을 때 박스요소 내부의 마우스 포인터 위치  
+                boxOffsetY = event.offsetY;
+            },false);
+
+            document.addEventListener("mouseup",function(event){
+                // 화면에서 마우스를 뗏을 때 마우스 움직일때 붙인 이벤트를 제거
+                document.removeEventListener('mousemove',boxMoveListener,false);
+            },false);
+
+
+            function boxMoveListener(event){  // 박스 위치를 계산하는 함수
+                box.style.left = event.pageX - boxOffsetX+"px"; //박스의 왼쪽 상단 가로 좌표
+                box.style.top = event.pageY - boxOffsetY+"px"; //박스의 왼쪽 상단 세로 좌표
+
+                console.log('event.pageX : '+event.pageX);
+                console.log('event.pageY : '+event.pageY);
+                console.log('boxOffsetX : '+boxOffsetX);
+                console.log('boxOffsetY : '+boxOffsetY);
+            }
+
+        }
+    </script>
+</body>
+</html>

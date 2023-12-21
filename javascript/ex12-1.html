@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button type="button" onclick="displayTime()">현재시간1</button>
+    <button type="button" id="nowBtn2">현재시간2</button>
+    <button type="button" onclick="nowBtn2Delete()">두번째 버튼 이벤트 삭제</button>
+    <button type="button" id="nowBtn3">현재시간3</button>
+    <button type="button" onclick="nowBtn3Delete()">세번째 버튼 이벤트 삭제</button>
+
+    <script>
+        /*
+            이벤트 : 사용자의 행동이나 특정 상황에 벌어지는 동작이나 사건
+        
+            - 어떤 요소에 이벤트가 필요한가?
+            - 어떤 이벤트가 있는가?
+            - 이벤트가 발생시 어떤 동작이 필요한가?
+
+            1) 어떤 요소에 이벤트를 만들것인가?
+                - HTML 요소의 속성으로 등록하는 방법
+                ex) onclick="함수명();"
+            
+                - DOM 요소에 프로퍼티로 등록하는 방법
+                ex) 요소객체.onclick = 함수명;
+
+                - 이벤트 리스너로 등록하는 방법[가장 정석, 세부 조작]
+                ex) 요소객체.addEventListener(handler,function,useCapture);
+                    - handler : 어떤 이벤트인가?(이벤트 유형)
+                    - function : 이벤트 발생시 동작할 함수
+                    - useCapture : 이벤트 전파 제어 
+                        => false 기본값 (버블링 단계 전파)
+                        => true  (캡쳐링 단계 전파)
+                
+            2) 어떤 이벤트 종류 가 있는가?
+                - click : 마우스 왼쪽 클릭을 했을 때
+                - dblclick : 더블클릭
+                - mousedown : 마우스를 눌렀을 때
+                - mouseup : 마우스 누른걸 뗏을 때
+                - mouseout : 마우스 커서가 해당 요소 위에서 빠져나갈 때
+                - mouseover : 마우스 커서가 해당 요소 위에 올라갔을 때
+                - mousemove : 마우스 커서가 움직일때
+                - keydown : 키보드의 버튼을 눌렀을 때
+                - keyup : 키보드의 버튼을 누른걸 뗏을 때
+                - keypress : 키보드 버튼을 눌렀다 뗏을때
+
+                - change : input 내부의 값이 변경
+                - fucus : input요소에 포커스가 맞춰졌을 때
+                - select : select 요소에서 선택이 되었을 때
+                - submit :  submit기능이 동작될 때
+
+                - resize : 요소의 크기가 변경될 때
+
+                - load : HTML요소가 모두 인식이 되었을 때
+
+                => 속성으로 이벤트를 붙이거나, 프로퍼티로 사용할 때는 on- 접두어를 붙여서 사용!
+
+            3) 이벤트가 발생시 어떤 동작이 필요한가? 함수
+                => 이벤트 리스너로 이벤트를 생성시 이름없는 함수(콜백 함수)를 전달
+                ex) 요소객체.addEventListener(handler,function(){ ~~ },useCapture);
+                    
+                => 이벤트 리스너로 등록되는 함수는 매개값으로 이벤트 객체를 전달 받을 수 있다.
+                ex) 요소객체.addEventListener(handler,function(event){
+                                                event.프로퍼티; event.메서드(); 
+                                            },useCapture);
+
+                => 이벤트 객체
+                - 주요 공통의 프로퍼티
+                    - target : 이벤트가 발생한 요소
+                    - currentTarget : 이벤트 리스너가 등록된 요소
+                - 키보드 전용 프로퍼티    => ex12-2.html
+                    - key : 눌린 키의 DOM String 
+                    - keycode : 눌린 키의 키코드
+                    - code : 눌린 키의 물리적 위치를 뜻하는 문자열
+                    - altkey : Alt키가 눌렸는 체크하는 논리 값
+                    - ctrlkey : Ctrl키가 눌렸는 체크하는 논리 값
+                    - shiftkey :  Shift키가 눌렸는 체크하는 논리 값
+                    - metakey :   Meta키가 눌렸는 체크하는 논리 값(win키)
+                
+                - 마우스 전용 프로퍼티   => ex12-3.html
+                    - detail : 마우스가 클릭된 회수
+                    - button : 마우스 버튼 위치 (0:왼쪽버튼, 1:휠버튼, 2:오른쪽 버튼)
+                    - screenX, screenY  : 마우스 관련 이벤트가 발생했을 때의 화면 좌표(모니터 왼쪽 위 꼭지점이 원점)
+                    - clientX, clientY  : 마우스 관련 이벤트가 발생했을 때의 윈도우 좌표(표시영역 왼쪽 위 꼭지점이 원점)
+                    - pageX, pageY      : 마우스 관련 이벤트가 발생했을 때의 문서 좌표(문서 왼쪽 위 꼭지점이 원점)
+                    - offsetX, offsetY  : 마우스 관련 이벤트가 발생했을 때의 요소 좌표(요소 왼쪽 위 꼭지점이 원점)
+
+            
+            [심화] 이벤트 전파
+            - 특정 요소에 이벤트가 발생한 경우 해당 요소까지 이벤트가 도달하기 위해서는 
+              조상요소를 투과해서 이벤트가 전달 된다. 이때 통과하는 모든 요소에 이벤트가 전달되는 현상을 이벤트 전파라고 한다.
+
+            => 이벤트가 DOM트리를 타고 이벤트 대상에게 전파되는 과정 : '캡쳐링' 전파
+            => 이벤트가 목표한 대상 요소(이벤트 타겟)에 도달하는 과정 : '타겟' 단계
+            => 이벤트가 타겟을 거쳐서 다시 DOM트리를 타고 되돌아오는 과정 : '버블링' 전파(기본값)                         
+            
+            예시 코드 : ex12-4.html
+
+            이벤트 전파를 통제하는 방법
+            - 이벤트 전파를 정지하는 방법 : stopPropagation();
+            - 이벤트 효과를 차단하는 방법 : stopImmediatePropagation();
+            - 기본동작 차단하는 방법 : preventDefault();
+            
+        */
+
+        function displayTime(){
+            let now = new Date();
+            alert("현재 시간 : "+now.toLocaleString());
+        }
+        let nowBtn2 = document.getElementById('nowBtn2');
+        nowBtn2.onclick = displayTime;
+
+        function nowBtn2Delete(){
+            nowBtn2.onclick = null;
+        }
+
+        let nowBtn3 = document.getElementById('nowBtn3');
+        //nowBtn3.addEventListener('click',displayTime,false);
+        nowBtn3.addEventListener('click',function(e){
+            //let btn = document.getElementById('nowBtn3');
+            e.currentTarget.classList.toggle('aa');
+        },false);
+
+        function nowBtn3Delete(){
+            nowBtn3.removeEventListener('click',displayTime,false);
+        }
+
+    </script>
+</body>
+</html>
