@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            스토리지 : 브라우저가 제공하는 임시 데이터 저장 공간
+            - sessionstorage  => 세션이 유지되는 동안 저장되는 공간 
+            - localstorage    => 디스크에 정보를 저장하는 공간(강제로 지우기 전까지는 정보가 유지)
+
+            ** => 웹 주소마다 정보를 따로따로 저장
+        
+            데이터를 관리 => CRUD
+
+            1. CREATE : 데이터 저장
+            - setItem('키','값');
+
+            2. UPDATE : 데이터 변경
+            - setItem('키','새로운 값');  // 키가 같은 데이터가 있을 때 새로운 값으로 변경
+
+            3. READ : 데이터 읽어오기
+            - getItem('키');   // 키에 해당하는 값을 읽어온다.
+
+            4. DELETE : 데이터 삭제하기
+            - removeItem('키'); 
+            - clear();   // 전체 키 삭제
+
+        */
+        let n = '홍길동';
+        window.sessionStorage.setItem('name',n);
+        window.localStorage.setItem('name','고길동');
+
+        sessionStorage.setItem('name','하츄핑');
+
+        let name = sessionStorage.getItem('name');
+        console.log(name);
+
+        sessionStorage.removeItem('name');
+        sessionStorage.clear();
+
+        
+
+    </script>
+</body>
+</html>

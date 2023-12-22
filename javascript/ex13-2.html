@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            JSON
+            - 스토리지에 저장하거나, 서로 다른 프로그램간 데이터 전송!!
+
+            배열이나 객체 데이터를 어떻게  전송(저장)할 것인가??
+            ex) let student = {stuNum:10,name:'홍길동',age:30,job:'도적'};
+            - 예전 : xml
+
+                [XML변환]
+                <student>
+                    <stuNum>10</stuNum>
+                    <name>홍길동</name>
+                    <age>30</age>
+                    <job>도적</job>
+                </student>
+
+            - 최근 : JSON
+                [JSON 변환]
+                "{stuNum:10,name:'홍길동',age:30,job:'도적'}";
+
+            => 배열이나 객체를 JSON으로 한땀한땀 변환하는 것은 불편하다.
+               => 변환을 위한 메서드가 각 언어마다 존재
+            
+            자바스크립트에서 제공하는 JSON 객체가 존재
+                - parse(json);          => JSON 데이터를 다시 배열이나 객체로 변환
+                - stringify(object);    => 배열이나 객체를 JSON 데이터로 변환  
+        */
+       // 배열 객체
+        let arr = ['베리하츄핑','샤샤핑','포실핑','말랑핑'];
+        console.log(typeof arr);  // object
+
+        let arrJson = JSON.stringify(arr);
+        console.log(typeof arrJson); // string
+        console.log(arrJson); //
+
+        let returnArr = JSON.parse(arrJson);
+        console.log(typeof returnArr); // object
+        console.log(returnArr); //
+        //-----------------------------------------------------------------
+        // 일반 객체
+        let obj = {stuNum:10,name:'홍길동',age:30,job:'도적'};
+        console.log(typeof obj);  // object
+
+        let objJson = JSON.stringify(obj);
+        console.log(typeof objJson); // string
+        console.log(objJson); //
+
+        let returnObj = JSON.parse(objJson);
+        console.log(typeof returnObj); // object
+        console.log(returnObj); //
+
+
+
+
+    </script>
+</body>
+</html>
