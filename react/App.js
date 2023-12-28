@@ -2,7 +2,7 @@
 // warning를 더이상 안보여줌
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 function App() {
 // --------- [리액트 학습 내용] --------------
@@ -65,7 +65,7 @@ function App() {
     }
     //  좋아요 버튼 
     //  좋아요 누를때마다 증가하는 값을 저장하는 state
-    let [fover,setFover] = useState(0);
+    let [fover,setFover] = useState([0,0,0]);
 
     //[미니과제] : 수정 버튼을 누르면 첫번째 글 제목을 "자바 공부"로 바꿔 봅시다.
     //  title[0] = '자바 공부';
@@ -170,9 +170,39 @@ function App() {
 
 
     // [미니 과제]  각 게시글 목록에서 제목을 누를 때 마다 게시글의 상세 내용이 하단에 출력되도록 만들어 보세요,.
-
+    let [titleName, setTitleName] = useState('');  // 상세보기의 제목을 저장할 스테이트
+    let [titleIndex, setTitleIndex] = useState();  // 상세보기의 제목 인덱스 번호를 저장할 스테이트  
+    
     // [미니 과제]  목록에서 각 게시글 마다 좋아요 버튼을 만들고 
     //              각 버튼이 클릭 될때 마다 별개의 카운트가 올라갈 수 있도록 코드를 작성해 봅시다.
+
+    // (12.28)
+    // 입력 요소 : HTML 입력 요소를 사용하면 된다.
+    let [inputData,setInputData] = useState('');
+    // 스테이트 변경 작업은 비동기로 처리가 된다.
+    //   비동기로 처리된다.
+    //    -> 자바스크립트의 동작방법
+    //       [기본] 위에서 아래로 순서대로 (동기방식)
+    //       [예외] 백그라운드 동작 => 대기열(큐 Queue) (비동기 방식)
+
+    // [미니 과제] 사용자로 부터 글을 입력받아서 글 목록에 등록해 봅시다.
+
+    // [미니 과제] 게시글 목록마다 삭제버튼을 만들어서 삭제버튼을 누를 때 마다 해당 게시글을 삭제해봅시다.
+
+    
+    // 컴포넌트
+    //  new => 함수로 컴포넌트를 만드는 방식
+    //  old => 클래스로 컴포넌트를 만드는 방식
+
+    // 1. class형 포넌트 생성
+    // 2. 생성자 필요
+    // 3. render()함수를 이용한 JSX 반환
+    // 4. 생성자 내부에 state 생성
+    // 5. state데이터 사용 : this.state.프로퍼티명
+    // 6. state 데이터 변경 : this.setState({프로퍼티명:바꿀 데이터});
+    // 7. 생성자 매개값을 통해서 props 객체 받기
+    // 8. props 데이터 사용 : this.props.프로퍼티명
+
 
 
 // --------- [리액트 학습 내용 끝] --------------
@@ -183,7 +213,7 @@ function App() {
           <h3>내 {data}</h3>
         </header>
 
-        <button onClick={function(){
+        <button onClick={function aa(){
           // 1. 배열의 값만 바꿔서는 변경 안됨 title[0] = '자바 공부';
           // 2. 배열 내부의 값만 바꿔서는 배열의 주소가 그대로 이므로 변경 안됨
           // title[0] = '자바 공부';
@@ -213,9 +243,31 @@ function App() {
         }}>
           상세보기
         </button>
-        {title}
+        <br/>
+        <input type='text' onChange={function(e){
+          // 입력된 데이터를 자바스크립트 데이터로 읽어오기 위함
+          // input태그의 value 파라미터 데이터를 읽어와야 함
+          //  e => 이벤트 객체
+          // console.log(e.target.value);
+          setInputData(e.target.value); 
+          console.log(inputData);
+        }}/>
+      
+
         {/* <div className="list">
-          <h4>{title[0]} <span onClick={function(){
+          <h4 onClick={function(){
+            setDetail(1); // 상세보기 표시
+            // 제목-----> Detail컴포넌트에 넘겨주고 싶다!
+            //          1. props  (1) 제목 자체, (2) 제목배열+인덱스
+            //  2. 선택이 발생한 제목이 무엇인가?
+
+            // (1)
+            setTitleName(title[0]);
+            //  (2)
+            setTitleIndex(0);  // 글 제목이 있는 인덱스만 전송
+            
+
+          }}>{title[0]} <span onClick={function(){
                 console.log('좋아요!!');
                 setFover(fover+1);
           }}>👍</span>{fover}</h4>
@@ -223,12 +275,20 @@ function App() {
         </div>
 
         <div className="list">
-          <h4>{title[1]}</h4>
+          <h4 onClick={function(){
+            setDetail(1); // 상세보기 표시
+            setTitleName(title[1]);
+            setTitleIndex(1);
+          }}>{title[1]}</h4>
           <p>11월 15일</p>
         </div>
 
         <div className="list">
-          <h4>{title[2]}</h4>
+          <h4 onClick={function(){
+            setDetail(1); // 상세보기 표시
+            setTitleName(title[2]);
+            setTitleIndex(2);
+          }}>{title[2]}</h4>
           <p>12월 15일</p>
         </div> */}
 
@@ -249,16 +309,22 @@ function App() {
               //   <h4>{t}</h4>
               //   <p>12월 15일</p>
               // </div>
-              <Title1 key={i} title={t} month='12' day={15} ></Title1>
+              <Title1 key={i} title={t} month='12' 
+                  index={i} day={15} 
+                  setTitle={setTitle} setDetail={setDetail} setTitleIndex={setTitleIndex}
+                  setFover={setFover} fover={fover} titleName={title}></Title1>
             );
-          })
-        }
-        {
-          datail == 1? <Detail></Detail> :null
+          }) 
         }
         
+        {
+          datail == 1? 
+            <Detail titleName={titleName} title={title} titleIndex={titleIndex} ></Detail> :
+            null
+        }
+        <Detail2 text={'고길동'}></Detail2>
 
-
+        
       </div>
     </>
   );
@@ -268,8 +334,28 @@ function App() {
 function Title1(props){
   return(
     <div className="list">
-      <h4>{props.title}</h4>
-      <p>{props.month}월 {props["day"]}일</p>
+      <h4 onClick={function(){
+          props.setDetail(1); // 상세보기 표시
+          // setTitleName(title[2]);
+          props.setTitleIndex(props.index);
+        }}>
+        
+        {props.titleName[props.index]}
+
+        <span onClick={function(e){
+            e.stopPropagation();
+            console.log('좋아요!!');
+            // props.setFover(props.fover+1);
+            let copyFover = [...props.fover];
+            copyFover[props.index] +=1;
+            props.setFover(copyFover);
+
+          }}>👍</span>
+        
+        {props.fover[props.index]}
+      </h4>
+
+      <p>{props.month}월 {props["day"]}일</p>  
     </div>
   );
 }
@@ -292,19 +378,48 @@ function Title3(){
   );
 }
 
-function Detail(){
+function Detail(props){
 
   return(
     <div className='detail'>
-      <h4>제목</h4>
+      <h4>{props.title[props.titleIndex]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
     </div>
   );
 }
 
+// 클래스형 컴포넌트 (class 예약어)   
+//  1.  React.Component를 상속받아서 만든다.   =>  <Detail2></Detail2>
+class Detail2 extends React.Component{
+  // 2. 반드시 생성자 함수를 만들어야 한다.
+  constructor(props){  // 7. props 데이터 받는 방법
+    super();
+    // 4. state 생성 => 생성자 내부에 this.state에 객체를 넣음으로 state 생성
+    this.state = {
+      name:'park',
+      age:25
+    }
+  }
 
+  // 3. JSX를 생성해야 한다.
+  render(){
+    return(
+      <div>
+        <h3>클래스형 컴포넌트 예제</h3>
+        {/*5. state 사용방법 : this.state.프로퍼티명 */}
+        <p>Hello! {this.state.name}</p>
+        {/*6. state 변경방법 : this.setState({프로퍼티명:바꿀데이터}) */}
+        <button onClick={()=>{
+          this.setState({name:'홍길동'});
+        }}>이름변경</button>
+        {/* 8. props 데이터 사용방법 : this.props.프로퍼티명 */}
+        <p>Props 데이터 출력 : {this.props.text}</p>
+      </div>
+    );
+  };
 
+}
 
 
 
