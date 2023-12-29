@@ -185,11 +185,14 @@ function App() {
     //       [기본] 위에서 아래로 순서대로 (동기방식)
     //       [예외] 백그라운드 동작 => 대기열(큐 Queue) (비동기 방식)
 
-    // [미니 과제] 사용자로 부터 글을 입력받아서 글 목록에 등록해 봅시다.
+    // [미니 과제] 사용자로 부터 글을 입력받아서 글 목록에 등록해 봅시다.(좋아요 기능도 동작하도록)
+//                          => 배열의 마지막에 끼워넣기
+ 
 
     // [미니 과제] 게시글 목록마다 삭제버튼을 만들어서 삭제버튼을 누를 때 마다 해당 게시글을 삭제해봅시다.
+//                          => 배열내에서 잘라내기
 
-    
+
     // 컴포넌트
     //  new => 함수로 컴포넌트를 만드는 방식
     //  old => 클래스로 컴포넌트를 만드는 방식
@@ -252,7 +255,20 @@ function App() {
           setInputData(e.target.value); 
           console.log(inputData);
         }}/>
-      
+        <button type='button' onClick={function(e){
+          // 글목록(title)에 작성된 글(inputData) 를 추가
+          let copyTitle = [...title];  // 기존 글 목록에 새로운 목록 생성
+          //copyTitle.push(inputData);   // 새로운 목록에 새로운 글 추가
+          copyTitle.unshift(inputData);  // -> 배열에 가장 앞에서 데이터를 끼워 넣는 메서드(unshfit)
+          setTitle(copyTitle);   // 새로운 글이 추가된 목록을 스테이트에 반영
+
+          //  새로 등록된 글에도 좋아요 버튼 생성
+          let copyFover = [...fover];
+          //copyFover.push(0);
+          copyFover.unshift(0);
+          setFover(copyFover);
+
+        }}>글 등록</button>
 
         {/* <div className="list">
           <h4 onClick={function(){
@@ -332,6 +348,7 @@ function App() {
 
 
 function Title1(props){
+  
   return(
     <div className="list">
       <h4 onClick={function(){
@@ -356,6 +373,20 @@ function Title1(props){
       </h4>
 
       <p>{props.month}월 {props["day"]}일</p>  
+      <button type='button' onClick={()=>{
+        // 글삭제 대상 => 글 목록 배열 
+
+        let copyTitle = [...props.titleName];
+        let copyFover = [...props.fover];
+        //  배열.splice(인덱스번호, 개수) ;  인덱스번호에 해당하는 요소부터 개수만큼 배열에 잘라내기
+        copyTitle.splice(props.index,1);
+        copyFover.splice(props.index,1);
+
+        props.setTitle(copyTitle);
+        props.setFover(copyFover);
+        props.setDetail(0);
+
+      }}>글 삭제</button>
     </div>
   );
 }
@@ -405,7 +436,7 @@ class Detail2 extends React.Component{
   // 3. JSX를 생성해야 한다.
   render(){
     return(
-      <div>
+      <div style={{display:'none'}}>
         <h3>클래스형 컴포넌트 예제</h3>
         {/*5. state 사용방법 : this.state.프로퍼티명 */}
         <p>Hello! {this.state.name}</p>
