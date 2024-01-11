@@ -94,7 +94,7 @@ public class Method01 {
 		System.out.println(12);
 		System.out.println(3.14);
 		System.out.println(true);
-		
+
 		
 	}
 //	public static double rectangleArea2(double w, double h) {
@@ -118,7 +118,7 @@ public class Method01 {
 	//public static int check2 = 0;
 	
 	
-	public static void test() {
+	public  void test() {
 		int check2 = 10;
 		System.out.println("check1 : "+check1);
 		System.out.println("check2 : "+check2);
@@ -141,9 +141,9 @@ public class Method01 {
 	
 	public static int adder(int a, int b) {
 		int c = a+b;
+	
 		return c;
 	}
-	
 	
 	
 	

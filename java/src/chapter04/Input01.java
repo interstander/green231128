@@ -47,6 +47,9 @@ public class Input01 {
 		//  해결방법 2. scan.nextLine();으로 입력받은후 적절하게 형변환 해주면 됨
 		
 		
+		int num = Integer.parseInt(scan.nextLine());
+		
+		
 		
 		
 		
