@@ -1,5 +1,7 @@
 package chapter07;
 
+import java.util.Scanner;
+
 public class Main01 {
 
 	public static void main(String[] args) {
@@ -65,12 +67,14 @@ public class Main01 {
 		//  =>  
 		
 		
+		GameChar g = new GameChar();
+		Scanner scan = new Scanner(System.in);
+		g.job = scan.nextLine();
+		
+		//g.GameChar();
 		
 		
-		
-		
-		
-		
+		System.out.println(123);
 		
 		
 		

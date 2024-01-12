@@ -18,6 +18,7 @@ public class GameChar { // 게임 케릭터
 	String job = "전사";
 	int str = 5;
 	int intel = 5;
+	int[] a = new int[5];
 	
 	// 특별한 메서드 => 생성자
 	public GameChar(String selectJob) { // 외부에서 선택한 직업을
@@ -27,11 +28,16 @@ public class GameChar { // 게임 케릭터
 	public GameChar() {
 		// 메서드(생성자) 오버 로딩
 	}
-	public GameChar(String selectJob,int str) {
+	
+	
+	
+	
+	public GameChar(String selectJob,int str,int intel) {
 		this.job = selectJob;
 		if(str >=0) {
 			this.str = str;	
 		}
+		this.intel = intel;
 		
 	}
 	
