@@ -181,5 +181,97 @@ SELECT eno,ename,job,salary,
               ,salary) AS "인상된 급여"
 FROM employee;
 
+--------------------------------------------------------------------------------
+-- [챕터3 테이블 제어 문제]
+--1. 다음 표에 명시된 대로 DEPT 테이블을 생성하세요
+--    | 칼럼명  | 데이터타입  | 크기 |
+--    | --- | --- | --- |
+--    | dno  | number  | 2 |
+--    | dname  | varchar2  | 14 |
+--    | location | varchar2  | 13 |
+--    |  |  |  |
+CREATE TABLE dept(
+    dno NUMBER(2),
+    dname VARCHAR2(14),
+    location VARCHAR2(13)
+);
+DESC dept;
+
+
+--2. 다음 표에 명시된 대로 EMP 테이블을 생성하세요.
+--    | 칼럼명  | 데이터타입  | 크기 |
+--    | --- | --- | --- |
+--    | eno  | number  | 4 |
+--    | ename  | varchar2  | 10 |
+--    | dno  | number  | 2 |
+CREATE TABLE emp(
+    eno NUMBER(4),
+    ename VARCHAR2(10),
+    dno NUMBER(2)
+);
+DESC emp;
+
+--3. 긴 이름을 저장할 수 있도록 EMP 테이블을 수정하세요.
+--    | 칼럼명  | 데이터타입  | 크기 |
+--    | --- | --- | --- |
+--    | eno  | number  | 4 |
+--    | ename  | varchar2  | 25 |
+--    | dno  | number  | 2 |
+ALTER TABLE emp
+    MODIFY ename VARCHAR2(25);
+    
+    
+--4. EMPLOYEE 테이블을 복사해서 EMPLOYEE2란 이름의 테이블을 생성하되 
+-- 사원번호, 이름, 급여, 부서번호 칼럼만 복사하고 
+--새로 생성된 칼럼명을 각각 EMP_ID, NAME, SAL, DEPT_ID 로 지정하세요.
+CREATE TABLE employee2
+AS SELECT eno AS "emp_id",
+          ename AS "name",
+          salary AS "sal",
+          dno AS "dept_id"
+    FROM employee
+DESC employee2;
+
+--5. EMP 테이블을 삭제하세요
+DROP TABLE emp;
+
+--6. EMPLOYEE2 테이블의 이름을 EMP로 변경하세요
+RENAME employee2 TO emp;
+DESC employee2;
+DESC emp;
+--7. DEPT 테이블에서 DNAME 칼럼을 제거하세요
+ALTER TABLE dept
+    DROP COLUMN dname;
+DESC dept;
+
+--8. DEPT 테이블에서 LOC칼럼을 UNUSED로 표시하세요.
+ALTER TABLE dept
+    SET UNUSED(location);
+DESC dept;
+
+--9. UNUSED 칼럼을 모두 제거하세요
+ALTER TABLE dept
+    DROP UNUSED COLUMNS;
+DESC dept;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
