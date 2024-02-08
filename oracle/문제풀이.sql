@@ -403,10 +403,343 @@ DELETE FROM dept_copy WHERE dno IN (10, 40);
 DELETE FROM dept_copy WHERE dno=10 OR dno=40;
 
 
+---------------------------------------------------------------------------------
+-- [서브 쿼리]
+-- 1. 사원 번호가 7788인 사원과 담당업무가 같은 사원을 표시(사원이름과 담당업무)하세요.
+SELECT ename, job
+FROM employee
+WHERE job = (SELECT job 
+                FROM employee
+                WHERE eno = 7788);
+
+-- 2. 사원번호가 7499인 사원보다 급여가 많은 사원을 표시(사원이름과 담당업무)하세요
+SELECT ename, job
+FROM employee
+WHERE salary >= (SELECT salary
+                    FROM employee
+                    WHERE eno = 7499);
+
+
+-- 3. 최소 급여를 받는 사원의 이름, 담당업무및 급여를 표시하세요(그룹함수)
+SELECT ename, job, salary
+FROM employee
+WHERE salary = (SELECT MIN(salary)
+                    FROM employee);
+
+
+-- 4. 평균 급여가 가장 적은 업무를 찾아 직급과 평균 급여를 표시하세요
+SELECT job, ROUND(AVG(salary))
+FROM employee
+GROUP BY job
+HAVING ROUND(AVG(salary)) = (SELECT MIN(ROUND(AVG(salary)))
+                                FROM employee
+                                GROUP BY job);
 
 
 
+-- 5. 각 부서의 최소급여를 받는 사원 이름, 급여, 부서번호를 표시하세요.
+SELECT ename, salary, dno
+FROM employee
+WHERE salary = ANY (SELECT MIN(salary)
+                    FROM employee
+                    GROUP BY dno);
 
+SELECT ename, salary, dno
+FROM employee
+WHERE salary IN (SELECT MIN(salary)
+                    FROM employee
+                    GROUP BY dno);
+                    
+-- 6. 담당업무가 분석가(ANALYST)인 사원보다 급여가 적으면서 
+-- 업무가 분석가(ANALYST)아닌 사원(사원번호, 이름, 담당업무, 급여)들을 표시하세요.
+SELECT eno, ename, job, salary
+FROM employee
+WHERE salary < (SELECT DISTINCT salary 
+                    FROM employee
+                    WHERE job = 'ANALYST')
+AND job <> 'ANALYST';
+
+
+-- 7. 매니저 없는 사원의 이름을 표시하세요.
+SELECT ename
+FROM employee
+WHERE eno = (SELECT eno
+                FROM employee
+                WHERE manager is null);
+
+SELECT ename
+FROM employee
+WHERE manager is null;
+-- 8. 매니저 있는 사원의 이름을 표시하세요.
+SELECT ename
+FROM employee
+WHERE manager IS NOT null;
+
+
+-- 9. BLAKE와 동일한 부서에 속한 사원의 이름과 입사일을 표시하는 질의를 작성하세요.
+--  (단 BLAKE는 제외)
+SELECT ename hiredate
+FROM employee
+WHERE dno = (SELECT dno 
+                FROM employee
+                WHERE ename='BLAKE')
+AND UPPER(ename) <> 'BLAKE';
+
+
+-- 10. 급여가 평균보다 많은 사원들의 사원번호와 이름을 표시하되 
+-- 결과를 급여에 대한 오름차순으로 정렬하세요.
+SELECT eno, ename, salary
+FROM employee
+WHERE salary >= (SELECT AVG(salary)
+                    FROm employee)
+ORDER BY salary ASC;
+
+
+
+-- 11. 이름에 K가 포함된 사원과 같은 부서에서 일하는 사원의 사원번호와 이름을 
+-- 표시하는 질의를 작성하세요.
+SELECT eno, ename
+FROM employee
+WHERE dno = ANY (SELECT dno
+                FROM employee
+                WHERE ename LIKE '%K%');
+
+SELECT eno, ename
+FROM employee
+WHERE dno IN (SELECT dno
+                FROM employee
+                WHERE ename LIKE '%K%');
+                
+-- 12. 부서위치가 DALLAS인 사원의 이름과 부서번호 및 담당업무를 표시하세요.
+SELECT ename, dno, job
+FROM employee
+WHERE dno =  (SELECT dno
+                FROM department
+                WHERE loc = 'DALLAS');
+
+SELECT ename, e.dno, job
+FROM employee e, department d
+WHERE e.dno = d.dno
+AND loc = 'DALLAS';
+
+
+-- 13. KING에게 보고하는 사원의 이름과 급여를 표시하세요
+SELECT ename, salary, job, dno
+FROM employee
+WHERE manager = (SELECT eno
+                    FROM employee
+                    WHERE ename = 'KING');
+
+
+-- 14. RESEARCH 부서의 사원에 대한 부서번호, 사원번호 및 담당업무를 출력하세요
+SELECT eno, ename, dno, job
+FROM employee
+WHERE dno =  (SELECT dno
+                FROM department
+                WHERE dname = 'RESEARCH');
+                
+SELECT eno, ename, e.dno, job
+FROM employee e, department d
+WHERE e.dno = d.dno
+AND dname = 'RESEARCH';
+
+-- 15. 평균 급여보다 많은 급여를 받고 (이름에서 M이 포함된 사원과 같은 부서에서) 근무하는 
+-- 사원의 사원번호, 이름, 급여를 출력하세요.
+SELECT eno, ename, salary
+FROM employee
+WHERE salary >= (SELECT AVG(salary)
+                    FROM employee)
+AND dno = ANY (SELECT dno
+                FROM employee
+                WHERE ename LIKE '%M%');
+
+
+-- 16. 평균급여가 가장 적은 업무를 찾으세요
+SELECT job, AVG(salary)
+FROM employee
+GROUP BY job
+HAVING AVG(salary) = (SELECT MIN(AVG(salary))
+                        FROM employee
+                        GROUP BY job);
+
+-- 17. 부하직원을 가진 사원의 사원번호와 이름을 출력하세요
+SELECT eno, ename
+FROM employee
+WHERE eno = ANY (SELECT manager
+                    FROM employee);
+
+--------------------------------------------------------------------------------
+-- [조인]
+-- 1. Equi조인을 사용하여 SCOTT 사원의 부서번호와 부서 이름을 출력하세요.
+SELECT d.dno, d.dname
+FROM employee e, department d
+WHERE e.dno = d.dno
+AND e.ename = 'SCOTT';
+
+SELECT dno, dname
+FROM department
+WHERE dno = (SELECT dno
+                FROM employee
+                WHERE ename = 'SCOTT');
+
+
+-- 2. Inner 조인과 on연산자를 사용하여 사원이름과 함께 
+-- 그 사원이 소속된 부서이름과 지역명을 출력하세요.
+SELECT e.ename, d.dname, d.loc
+FROM employee e INNER JOIN department d
+ON e.dno = d.dno;
+
+
+-- 3. INNER 조인 Using 연산자를 사용하여 10번 부서에 속하는 
+-- 모든 담당업무의 고유 목록을 부서의 지역명을 포함하여 출력하세요.
+SELECT job, dname
+FROM employee INNER JOIN department
+USING(dno)
+WHERE dno = 10;
+
+-- 4. Natural 조인을 사용하여 커미션을 받는 모든 사원의 이름, 부서이름, 지역명을 출력하세요.
+SELECT ename, dname, loc
+FROM employee NATURAL JOIN department
+WHERE commission IS NOT null;
+
+
+-- 5. Equal 조인과 Wild카드를 사용해서 이름에 A가 포함된 모든 사원의 이름과 부서명을 출력하세요.
+SELECT ename, dname
+FROM employee e, department d
+WHERE e.dno = d.dno
+AND ename LIKE '%A%'; 
+
+-- 6. Natural 조인을 사용하여 NEW York에 근무하는 모든 사원의 이름, 업무 부서번호및 부서명을 출력하세요.
+SELECT ename, job, dno, dname
+FROM employee NATURAL JOIN department
+WHERE loc = 'NEW YORK';
+
+
+-- 7. Self Join을 사용하여 사원의 이름및 사원 번호를 관리자 이름 및 관리자 번호와 함께 출력하세요. 
+-- 각 열의 별칭은 사원이름(Employee) 사원번호(emp#) 관리자이름(Manager) 관리자번호(Mgr#)로 출력하세요
+SELECT emp.ename AS "Employee",
+        emp.eno AS "emp#",
+        manager.ename AS "Manager",
+        manager.eno AS "Mgr#"
+FROM employee emp, employee manager
+WHERE emp.manager = manager.eno;
+
+
+-- 8. Outter 조인 self 조인을 사용하여 관리자가 없는 사원을 포함하여 
+-- 사원번호를 기준으로 내림차순 정렬하여 출력하세요 
+-- 각 열의 별칭은 사원이름(Employee)사원번호(emp#) 관리자이름(Manager) 관리자번호(Mgr#)로 출력하세요
+SELECT emp.ename AS "Employee",
+        emp.eno AS "emp#",
+        manager.ename AS "Manager",
+        manager.eno AS "Mgr#"
+FROM employee emp, employee manager
+WHERE emp.manager = manager.eno(+)
+ORDER BY emp.eno DESC;
+
+-- 9. Self 조인을 사용하여 지정한 사원(SCOTT)과 같은 부서에서 근무하는 사원 정보(이름, 부서번호)를 출력하세요 
+-- 각 열의 별칭은 이름, 부서번호, 동료로 지정하세요(X)
+SELECT ename , dno
+FROM employee
+WHERE dno = (SELECT dno
+                FROM employee
+                WHERE ename = 'SCOTT');
+                
+SELECT me.ename AS "이름",
+       me.dno AS "부서번호",
+       other.ename AS "동료"
+FROM employee me , employee other
+WHERE me.dno = other.dno
+AND me.ename = 'SCOTT'
+AND other.ename <> 'SCOTT';
+
+
+-- 10. Self 조인을 사용하여 WARD 사원보다 늦게 입사한 사원의 이름과 입사일을 출력하세요.
+SELECT other.ename, other.hiredate
+FROM employee me, employee other
+WHERE me.hiredate < other.hiredate
+AND me.ename = 'WARD';
+
+-- 11. Self 조인을 사용하여 관리자보다 먼저 입사한 모든 사원의 이름 및 입사일을 
+-- 관리자의 이름 및 입사입과 함께 출력하세요. 
+-- 각 열의 별칭은 사원이름(Ename) 사원입사일(HIREDATE) 관리자 이름(Ename) 관리자 입사입(HIERDATE)로 출력하세요
+SELECT emp.ename AS "EMPLOYEE",
+        emp.hiredate AS "E_HIREDATE",
+        manager.ename AS "MANAGER",
+        manager.hiredate  AS "M_HIREDATE"
+FROM employee emp , employee manager
+WHERE emp.manager = manager.eno
+AND emp.hiredate <= manager.hiredate;
+
+--------------------------------------------------------------------------------
+-- [무결성과 제약조건]
+-- 1. Employee테이블의 구조를 복사하여 emp_sample란 이름의 테이블을 만드세요 
+-- 사원테이블의 사원 번호칼럼에 테이블 레벨로 primary key 제약조건을 지정하되 
+-- 제약조건 이름은 my_emp_pk로 지정하세요.
+CREATE TABLE emp_sample
+AS SELECT * FROM employee WHERE 0=1;
+
+ALTER TABLE emp_sample
+    ADD CONSTRAINT my_emp_pk PRIMARY KEY(eno);
+
+
+-- 2. department 테이블의 구조를 복사하여 dept_sample이란 테이블을 만드세요. 
+-- dept_sample의 부서번호 칼럼에 테이블 레벨로 primary key 제약조건을 지정하되 
+-- 제약조건 이름은 my_dept_pk로 지정하세요.
+CREATE TABLE dept_sample
+AS SELECT * FROM department WHERE 0=1;
+
+ALTER TABLE dept_sample
+    ADD CONSTRAINT my_dept_pk PRIMARY KEY(dno);
+
+
+-- 3. 사원 테이블의 부서번호 칼럼에 존재하지 않는 부서의 사원이 배정되지 않도록 
+-- 외래키 제약조건을 지정하되 제약조건 이름은 my_emp_dept_fk로 지정하세요.
+ALTER TABLE emp_sample
+    ADD CONSTRAINT my_emp_dept_fk FOREIGN KEY(dno) REFERENCES dept_sample(dno);
+
+
+-- 4. 사원 테이블의 커미션 컬럼에 0보다 큰 값만을 입력할 수 있도록 제약조건을 지정하세요
+ALTER TABLE emp_sample
+    ADD CONSTRAINT emp_comm_min CHECK(commission>0);
+    
+SELECT * FROM user_CONSTRAINTS;
+
+--------------------------------------------------------------------------------
+-- [시퀀스와 인덱스]
+
+-- 1. 사원 테이블의 사원번호가 자동으로 생성되도록 시퀀스를 생성하시오. 
+-- (시작값: 1, 증가값:1 최대값:100000)
+CREATE SEQUENCE emp01_seq
+START WITH 1
+INCREMENT BY 1
+MAXVALUE 100000
+NOCACHE;
+--테이블 생성 (emp01)
+--| 컬럼명    | 자료형    | 크기 |
+--| ---      | ---      | ---  |
+--| empno    | number   | 4    |
+--| ename    | varchar2 | 10   |
+--| hiredate | date     |      |
+CREATE TABLE emp01(
+    empno NUMBER(4),
+    ename VARCHAR2(10),
+    hiredate DATE
+);
+
+-- 2. 사원번호를 시퀀스로부터 발급받아서 위쪽 테이블에 데이터를 입력하세요.
+--    
+--    1)사원 이름: Julia, 입사일: sysdate
+--    2)사원 이름: Alice 입사입: 2020/12/31
+INSERT INTO emp01
+VALUES(emp01_seq.nextval,'Julia',sysdate);
+INSERT INTO emp01
+VALUES(emp01_seq.nextval,'Alice',TO_DATE('2020/12/31','YYYY/MM/DD'));
+
+SELECT * FROM emp01;
+--  1. EMP01 테이블의 이름 칼럼을 인덱스로 설정하되 
+-- 인덱스 이름을 IDX_EMP01_EName로 지정하세요
+CREATE INDEX  idx_emp01_ename
+ON emp01(ename);
 
 
 
