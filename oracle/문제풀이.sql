@@ -741,8 +741,326 @@ SELECT * FROM emp01;
 CREATE INDEX  idx_emp01_ename
 ON emp01(ename);
 
+--------------------------------------------------------------------------------
+-- [뷰 => 데이터 조회(SELECT)]
+-- 1. 20번 부서에 소속된 사원의 사원번호와 이름, 부서번호를 출력하는 SELECT문을 하나의 뷰(v_em_dno) 로 정의하세요.
+CREATE OR REPLACE VIEW v_em_dno
+AS
+SELECT eno, ename, dno
+FROM employee
+WHERE dno = 20;
+
+SELECT * FROM v_em_dno;
+
+-- 2. 이미 생성된 뷰(v_em_dno)에 대해서 급여와 담당업무 역시 출력할 수 있도록 수정하세요.
+CREATE OR REPLACE VIEW v_em_dno
+AS
+SELECT eno, ename, dno, salary, job
+FROM employee
+WHERE dno = 20;
+
+-- 3. 담당업무별로 최대급여, 최소급여, 급여 총액을 보여주는 뷰(EMP_group_job)를 생성한 다음 조회 해봅시다.
+CREATE OR REPLACE VIEW emp_group_job
+AS
+SELECT job, MAX(salary) AS "최대급여", MIN(salary) AS "최소급여", SUM(salary) AS "급여 총액"
+FROM employee
+GROUP BY job;
+
+SELECT * FROM emp_group_job;
 
 
+-- 4. 이미 생성된 뷰(v_em_dno)를 통해서 접근가능한 데이터만 입력가능하도록 제약을 걸어 봅시다
+CREATE OR REPLACE VIEW v_em_dno
+AS
+SELECT eno, ename, dno, salary, job
+FROM employee
+WHERE dno = 20 WITH CHECK OPTION;
+
+
+-- 5. 다음 데이터를뷰(v_em_dno) 를 통해서 입력을 한뒤 뷰(EMP_group_job)를 통해서 조회 해본다
+    
+    
+--    | eno   | ename   | dno | salary |  job     |
+--    | ----- | ------- | --- | ------ | -------- |
+--    | 5100  | belita  | 10  | 1500   | CLERK    |
+--    | 5200  | erica   | 20  | 2300   | ANALYST  |
+--    | 5300  | kali    | 30  | 1750   | SALESMAN |
+--    | 5400  | mia     | 20  | 950    | ANALYST  |
+--    | 5500  | zinna   | 10  | 1050   | CLERK    |
+INSERT INTO v_em_dno
+VALUES(5100,'belita',10,1500,'CLERK');
+INSERT INTO v_em_dno
+VALUES(5200,'erica',20,2300,'ANALYST');
+INSERT INTO v_em_dno
+VALUES(5300,'kali',30,1750,'SALESMAN');
+INSERT INTO v_em_dno
+VALUES(5400,'mia',20,950,'ANALYST');
+INSERT INTO v_em_dno
+VALUES(5500,'zinna',10,1050,'CLERK');
+COMMIT;
+
+SELECT * FROM v_em_dno;
+SELECT * FROM emp_group_job;
+
+-- 6. 이미 생성된 뷰(v_em_dno)에 대해서 읽기 전용 속성을 부여해봅시다.
+CREATE OR REPLACE VIEW v_em_dno
+AS
+SELECT eno, ename, dno, salary, job
+FROM employee
+WHERE dno = 20 WITH READ ONLY;
+
+
+
+-- 7. 사번, 사원이름, 부서번호와 부서 이름을 보여주는 뷰를(emp_dept)생성하세요.
+CREATE OR REPLACE VIEW emp_dept
+AS
+SELECT eno, ename, dno, dname
+FROM employee JOIN department
+USING(dno);
+
+SELECT * FROM emp_dept;
+
+
+-- 8. 생성된 모든 뷰를 조회하세요.(데이터 사전을 조회하세요.)
+SELECT * FROM user_views;
+
+-- 9. 생성된 뷰(v_em_dno, emp_group_job, emp_dept)를 제거하세요
+DROP VIEW v_em_dno;
+DROP VIEW emp_group_job;
+DROP VIEW emp_dept;
+--------------------------------------------------------------------------------
+--  [PL/SQL]
+SET SERVEROUTPUT ON;
+-- 1. IF문을 사용하여 KING사원의 부서번호를 얻어와서 부서 번호에 따른 부서명을출력하세요.
+DECLARE
+    v_dno employee.dno%type;
+    v_dname department.dname%type;
+BEGIN
+    SELECT dno INTO v_dno
+    FROM employee
+    WHERE ename = 'KING';
+    
+    IF v_dno = 10 THEN
+        v_dname := 'ACCOUNTING';
+    ELSIF v_dno = 20 THEN
+        v_dname := 'RESEARCH';
+    ELSIF v_dno = 30 THEN
+        v_dname := 'SALES';
+    ELSIF v_dno = 40 THEN
+        v_dname := 'OPERATIONS';
+    END IF;
+    dbms_output.put_line('KING이 소속된 부서명 : '||v_dname);
+END;
+SELECT * FROM department;
+
+
+-- 2. BASIC LOOP문으로 1부터 10사이의 자연수의 합을 구하여 출력하세요
+DECLARE
+    n NUMBER := 1;
+    total NUMBER := 0;
+BEGIN
+    LOOP
+        total := total + n;
+        n:= n+1;
+        EXIT WHEN n>10;
+    END LOOP;
+    dbms_output.put_line('합계 : '||total);
+END;
+
+-- 3. FOR LOOP문으로 1부터 10사이의 자연수의 합을 구하여 출력하세요.
+DECLARE
+    total NUMBER := 0;
+BEGIN
+    FOR n IN 1..10 LOOP
+        total := total + n;
+    END LOOP;
+    dbms_output.put_line('합계 : '||total);
+END;
+
+
+
+-- 4. WHILE LOOP문으로 1부터 10사이의 자연수의 합을 구하여 출력하세요.
+DECLARE
+    n NUMBER := 1;
+    total NUMBER := 0;
+BEGIN
+    WHILE n<=10 LOOP
+        total := total + n;
+        n:= n+1;
+    END LOOP;
+    dbms_output.put_line('합계 : '||total);
+END;
+
+
+
+
+-- 5. 사원 테이블에서 커미션이 NULL아닌 상태의 사원번호, 이름, 급여를 
+--     이름 기준으로 오름차순으로 정렬한 결과를 출력하세요
+DECLARE
+    v_emp employee%rowtype;
+    CURSOR c_emp
+    IS
+    SELECT * FROM employee
+    WHERE commission IS NOT NULL
+    ORDER BY ename ASC;
+BEGIN
+    dbms_output.put_line('사원번호  이름  급여');
+    dbms_output.put_line('-------------------------');
+    OPEN c_emp;
+    LOOP
+        FETCH c_emp INTO  v_emp;
+        EXIT WHEN c_emp%NOTFOUND;
+        dbms_output.put_line(v_emp.eno||' '||v_emp.ename||' '||v_emp.salary);
+    END LOOP;
+    CLOSE c_emp;
+END;
+
+
+-- 6. 다음과 같은 테이블(Student)을 만들고 데이터를 입력한다.
+--    
+--    | 칼럼명  | 데이터타입    | 제약조건        |
+--    | ------ | ------------ | ------------- |
+--    | sid    | number       | primary key   |
+--    | sname  | nvarchar2(5) | not null      |
+--    | kscore |  number(3)   | check(0~100)  |
+--    | escore |  number(3)   | check(0~100)  |
+--    | mscore |  number(3)   | check(0~100)  |
+--
+--  학번은 시퀀스(seq_stu_id)로 저장한다.
+--
+--  [데이터]
+--  학번   이름      국어   영어     수학
+--  1    고길동      78     64       82
+--  2    김길동      85     71       64
+--  3    이길동      74     69       57
+--  4    박길동      74     77       95
+--  5    홍길동      68     95       84
+
+CREATE TABLE Student(
+    sid NUMBER PRIMARY KEY,
+    sname NVARCHAR2(5) NOT NULL,
+    kscore NUMBER(3) CHECK(0<= kscore AND kscore <= 100),
+    escore NUMBER(3) CHECK(0<= escore AND escore <= 100),
+    mscore NUMBER(3) CHECK(0<= mscore AND mscore <= 100)
+);
+CREATE SEQUENCE seq_stu_id
+NOCACHE;
+INSERT INTO Student
+VALUES(seq_stu_id.nextval,'고길동',78,64,82);
+INSERT INTO Student
+VALUES(seq_stu_id.nextval,'김길동',85,71,64);
+INSERT INTO Student
+VALUES(seq_stu_id.nextval,'이길동',74,69,57);
+INSERT INTO Student
+VALUES(seq_stu_id.nextval,'박길동',74,77,95);
+INSERT INTO Student
+VALUES(seq_stu_id.nextval,'홍길동',68,95,84);
+
+COMMIT;
+SELECT * FROM Student;
+--
+--  6-1. 학생별 총점과 평균을 구하세요.
+DECLARE
+    v_stu Student%rowtype;
+    v_total NUMBER := 0;
+    v_avg NUMBER(5,3) :=0;
+    CURSOR c_student
+    IS
+    SELECT * FROM Student;
+BEGIN
+    dbms_output.put_line('학생이름  총점   평균');
+    dbms_output.put_line('----------------------------');
+    FOR v_stu IN c_student LOOP
+        v_total := v_stu.kscore + v_stu.escore + v_stu.mscore;
+        v_avg := v_total/3;
+        
+        dbms_output.put_line(v_stu.sname||' '||v_total||' '||v_avg);
+    END LOOP;
+END;
+
+
+
+--  6-2. 과목별 총점과 평균을 구하세요.
+DECLARE
+    v_stu Student%rowtype;
+    v_ktotal NUMBER := 0;
+    v_kavg NUMBER(5,3) :=0;
+    v_etotal NUMBER := 0;
+    v_eavg NUMBER(5,3) :=0;
+    v_mtotal NUMBER := 0;
+    v_mavg NUMBER(5,3) :=0;
+    CURSOR c_student
+    IS
+    SELECT * FROM Student;
+BEGIN
+    dbms_output.put_line('과목  총점   평균');
+    dbms_output.put_line('----------------------------');
+    FOR v_stu IN c_student LOOP
+        v_ktotal := v_ktotal + v_stu.kscore;
+        v_etotal := v_etotal + v_stu.escore;
+        v_mtotal := v_mtotal + v_stu.mscore;
+    END LOOP;
+    v_kavg := v_ktotal/5;
+    v_eavg := v_etotal/5;
+    v_mavg := v_mtotal/5;
+    dbms_output.put_line('국어'||' '||v_ktotal||' '||v_kavg);
+    dbms_output.put_line('영어'||' '||v_etotal||' '||v_eavg);
+    dbms_output.put_line('수학'||' '||v_mtotal||' '||v_mavg);
+END;
+--------------------------------------------------------------------------------
+-- [프로시저]
+-- 1. 사원 테이블에서 커미션이NULL이 아닌 상태의 사원 번호와 이름, 급여를 출력하되
+--    급여를 기준으로 오름차순 정렬한 결과를 나타내는 저장 프로시저를 생성하세요.
+SELECT eno, ename, salary
+FROM employee
+WHERE commission IS NOT NULL
+ORDER BY salary ASC;
+
+CREATE OR REPLACE PROCEDURE sp_salary_comm
+IS
+    v_emp employee%rowtype;
+    CURSOR c_emp
+    IS
+    SELECT *
+    FROM employee
+    WHERE commission IS NOT NULL
+    ORDER BY salary ASC;
+BEGIN
+    dbms_output.put_line('사원번호  이름  급여');
+    dbms_output.put_line('----------------------------');
+    OPEN c_emp;
+    LOOP
+        FETCH c_emp INTO v_emp;
+        EXIT WHEN c_emp%NOTFOUND;
+        dbms_output.put_line(v_emp.eno||' '||v_emp.ename||' '||v_emp.salary);
+    END LOOP;
+    CLOSE c_emp;
+END;
+
+EXECUTE sp_salary_comm;
+
+-- 2. 저장 프로시저를 수정하여 커미션 컬럼을 하나 더 출력하고 
+--     이름을 기준로 내리차순으로 정렬하세요.
+CREATE OR REPLACE PROCEDURE sp_salary_comm
+IS
+    v_emp employee%rowtype;
+    CURSOR c_emp
+    IS
+    SELECT *
+    FROM employee
+    WHERE commission IS NOT NULL
+    ORDER BY salary ASC;
+BEGIN
+    dbms_output.put_line('사원번호  이름  급여 커미션');
+    dbms_output.put_line('--------------------------------');
+    FOR v_emp IN c_emp LOOP
+        dbms_output.put_line(v_emp.eno||' '||v_emp.ename||' '||v_emp.salary||' '||v_emp.commission);
+    END LOOP;
+END;
+
+EXECUTE sp_salary_comm;
+-- 3. 생성된 저장 프로시저를 제거하세요.
+DROP PROCEDURE sp_salary_comm;
 
 
 
