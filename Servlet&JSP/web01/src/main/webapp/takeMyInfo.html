@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>내 정보를 처리해 주세요 - GET</h3>
+<form action="IIS" method="get">
+	이름 : <input type="text" name="username"><br> <!-- name=이름, value=값 -->
+	나이 : <input type="number" name="userage"><br>
+	성별 : <input type="radio" name="gender" value="male">남
+		  <input type="radio" name="gender" value="female">여 <br>
+	취미 : 
+	<input type="checkbox" name="hobby" value="movie">영화감상
+	<input type="checkbox" name="hobby" value="reading">독서
+	<input type="checkbox" name="hobby" value="swimming">수영
+	<input type="checkbox" name="hobby" value="gamming">게임<br>
+	<button type="submit">전송</button>
+</form>
+<hr />
+<h3>내 정보를 처리해 주세요 - POST</h3>
+<form action="IIS" method="post">
+	이름 : <input type="text" name="username"><br>
+	나이 : <input type="number" name="userage"><br>
+	성별 : <input type="radio" name="gender" value="male">남
+		  <input type="radio" name="gender" value="female">여 <br>
+	취미 : 
+	<input type="checkbox" name="hobby" value="movie">영화감상
+	<input type="checkbox" name="hobby" value="reading">독서
+	<input type="checkbox" name="hobby" value="swimming">수영
+	<input type="checkbox" name="hobby" value="gamming">게임<br>
+	<button type="submit">전송</button>
+</form>
+</body>
+</html>
