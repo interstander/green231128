@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        img{
+            margin: 0;
+            padding: 0;
+            width: 300px;
+            height: 300px;
+            position: absolute;
+        }
+        #gallary{
+            margin: 0;
+            padding: 0;
+            width: 300px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <h1>객체 배치 응용</h1>
+    <div id="gallary">
+        <img src="../img/books-2606859_640.jpg" alt="">
+        <img src="../img/monastery-4169566_640.jpg" alt="">
+        <img src="../img/natural-history-museum-2203648_640.jpg" alt="">
+        <img src="../img/stone-circles-1853340_640.jpg" alt="">
+        <img src="../img/wood-1755730_640.jpg" alt="">
+    </div>
+    <script>
+        setInterval(function(){
+            $('img').first().appendTo($('#gallary'))
+        },2000);
+        
+    </script>
+</body>
+</html>

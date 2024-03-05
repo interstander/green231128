@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        *{}
+        #header{}
+        .title{}
+        h1{}
+
+    </style>
+</head>
+<body>
+    <h1 id="header" class="title">안녕하세요</h1>
+
+    <script>
+        // 제이쿼리는 기본적으로 2개의 파트로 구분
+        //  1. 문서객체를 선택
+        //  2. 선택한 문서 객체에 기능을 적용
+
+        //-----------------------------------------------------
+        // 1. 문서 객체를 선택하는 방법
+        // - 기존 자바스크립트에서 문서 객체를 선택하는 방법
+        document.getElementById('header');
+        document.getElementsByClassName('title');
+        document.getElementsByTagName('h1');
+
+        // - 제이쿼리에서 문서객체를 선택하는 방법
+        //  1) 선택자를 이용한 방식
+        $('h1');  // 태그이름 선택자를 이용한 방법
+        $('*');   //  전역 선택자를 이용한 방법
+        $('#header'); // id 선택자를 이용한 방법
+        $('.title');  // class 선택자를 이용한 방법
+
+        //  2) 자바스크립트로 가져온 문서 객체를 이용하는 방법
+        let a1 = document.getElementById('header');
+        $(a1);
+
+    //----------------------------------------------------------------------
+        // 예제 선택한 문서 객체의 글자 색을 변경해 봅시다.
+        $('h1').css('color','red');
+        
+    //----------------------------------------------------------------------   
+        // 새로운 문서 객체를 생성하는 방법
+        //  - 기존 자바스크립트 코드
+        document.createElement('p');  // <p></p>
+
+        //  - 제이쿼리
+        $('<p></p>');    // <p></p>
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

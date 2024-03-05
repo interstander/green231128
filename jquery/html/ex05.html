@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        .box{
+            border: 1px solid red;
+            height: 140px;
+        }
+    </style>
+</head>
+<body>
+    <h1>문서 객체 삭제</h1>
+    <div class="box">
+        <h3>안녕하세요 1</h3>
+        <h3>안녕하세요 2</h3>
+        <h3>안녕하세요 3</h3>
+    </div>
+    <script>
+        // 문서객체를 화면에서 지우는 방법 : remove()
+        // $(document).ready(function(){
+        //     $('h3').first().remove();
+        // })
+        // 문서 객체 내부를 비우는 메서드 : empty()
+        $(document).ready(function(){
+            $('.box').empty();
+        })
+
+    </script>
+</body>
+</html>

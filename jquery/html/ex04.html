@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        .box{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="move">태그가 움직입니다.</h1>
+    <hr>
+<!--   [before]     -->
+    <div class="box">
+<!--   [prepand]    -->
+        <h2>안녕하세요</h2>
+<!--   [append]     -->
+    </div>
+<!--   [after]      -->
+
+    <script>
+        // 문서객체의 이동 및 삽입
+
+        //
+        //  before('대상') : 대상 객체의 형제요소로서 윗부분에 끼워넣기
+        //------------------------------------------------
+        //  - prepend('대상') : 대상의 자식요소로서 첫 부분에 끼워넣기
+        // [대상 객체 : div] 대상 객체를 기준으로 객체를 이동하거나 끼워넣을 수 있다.
+        //  - append('대상') : 대상의 자식요소로서 마지막 부분에 끼워넣기
+        //------------------------------------------------
+        //  after('대상') : 대상 객체의 형제요소로서 아랫부분에 끼워넣기
+
+        //  방법 1 : 대상 객체를 선택하고 요소를 대상에 끼워 넣는 방식 
+        // $('.box').before($('#move'));
+        // $('.box').prepend($('#move'));
+        // $('.box').append($('#move'));
+        // $('.box').after($('#move'));
+
+        // 방법 2 : 옮기고 싶은 요소를 선택해서 대상객체에 끼워 넣는 방식
+        // $('#move').insertBefore($('.box'));
+        // $('#move').prependTo($('.box'));
+        // $('#move').appendTo($('.box'));
+        // $('#move').insertAfter($('.box'));
+
+        //-------------------------------------------------------------------------
+        //  새로운 객체를 생성해서 배치
+        //  방법 1
+        // $('.box').before('<h3>반갑습니다. - before</h3>');
+        // $('.box').prepend('<h3>반갑습니다. - prepend</h3>');
+        // $('.box').append('<h3>반갑습니다. - append</h3>');
+        // $('.box').after('<h3>반갑습니다. - after</h3>');
+
+        // 방법 2 : 메서드 체이닝 => 사용하기 편리함
+        $('<h3></h3>').html('반갑습니다 - insertBefore').css('color','red').insertBefore($('.box'));
+        $('<h3></h3>').html('반갑습니다 - prependTo').css('color','blue').prependTo($('.box'));
+        $('<h3></h3>').html('반갑습니다 - appendTo').css('color','green').appendTo($('.box'));
+        $('<h3></h3>').html('반갑습니다 - insertAfter').css('color','pink').insertAfter($('.box'));
+
+    </script>
+</body>
+</html>

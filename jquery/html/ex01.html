@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> -->
+    <script src="../jquery/jquery-3.7.1.js"></script>
+</head>
+<body>
+<script>
+    //  - 제이쿼리(jquery) => 기능을 모아둔 라이브러리
+    //     라이브러리를 다운 받아야 한다.
+    //      - 제이쿼리 사이트에서 직접 파일을 다운 받는 방법
+    //          장점 : 코드 작성시 자동완성 기능 제공
+    //          단점 : 트래픽이 과다
+    //      - CDN 서버를 이용해서 간접적으로 사용하는 방법
+    //          장점 : 트래픽을 최소화
+    //          단점 : 개발할 때 불편
+
+    //-----------------------------------------------------------------------
+    
+    // 제이쿼리의 동작 원리
+    //   모든 동작을 제이쿼리 객체를 통해서 진행
+
+    // 자바스크립트 코드
+    window.onload = function(){
+        // HTML의 모든 노드가 생성되고난 직후에 동작되는 함수
+        alert("동작 완료!");
+    }
+
+    // 제이쿼리 코드
+    jQuery(document).ready(function(){
+        alert("제이쿼리 동작 완료!");
+    });
+    // HTML의 모든 노드가 생성되고난 직후에 동작되는 함수
+
+    $(document).ready(function(){
+        alert("제이쿼리 동작 완료!");
+    });
+
+
+
+
+
+
+</script>
+</body>
+</html>
