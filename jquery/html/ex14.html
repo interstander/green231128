@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이미지 슬라이드</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            text-align: center;
+        }
+        /* animation_canvas */
+        #animation_canvas{
+            margin: 0 auto;
+            width: 600px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        /* slider_panel */
+        .slider_panel{
+            width: 3000px;  /* 600*5 */
+            position: relative;
+        }   
+        .slider_image{
+            width: 600px;
+            height: 400px;
+            float: left;
+        }
+        /* slider_text_panel */
+        .slider_text_panel{
+            position: absolute;
+            top: 200px;
+            left: 50px;
+        }
+        .slider_text{
+            position: absolute;
+            width:250px;
+            height: 150px;
+            color: whitesmoke;
+        }
+        /* control_panel */
+        .control_panel{
+            position: absolute;
+            top:380px;
+            left: 270px;
+            height: 13px; /*버튼이 보여지는 높이 */
+            overflow: hidden;
+        }
+        .control_btn{
+            width: 12px;
+            height: 46px;
+            position: relative;
+            float: left;
+            cursor: pointer;
+            background-image: url('../img/point_button.png');
+        }
+        .control_btn:hover{
+            top:-16px;
+        }
+        .control_btn:active{ /*마우스커서로 누르고 있을 때 */
+            top:-31px;
+        }
+        .active{ /*현재 활성화된 이미지가 보여지는 번호의 버튼*/
+            top:-31px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <h1>이미지 슬라이더</h1>
+    <div id="animation_canvas"> <!-- 실제 이미지가 보여질 공간 -->
+        <div class="slider_panel"> <!-- 이미지가 저장되는 공간-->
+            <img class="slider_image" src="../img/books-2606859_640.jpg" alt="도서">
+            <img class="slider_image" src="../img/monastery-4169566_640.jpg" alt="복도">
+            <img class="slider_image" src="../img/natural-history-museum-2203648_640.jpg" alt="박물관">
+            <img class="slider_image" src="../img/stone-circles-1853340_640.jpg" alt="공원">
+            <img class="slider_image" src="../img/wood-1755730_640.jpg" alt="전통문">
+        </div> 
+        <div class="slider_text_panel">   <!-- 텍스트가 저장되는 공간-->
+            <div class="slider_text">
+                <h1>Lorem ipsum(1)</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="slider_text">
+                <h1>Lorem ipsum(2)</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="slider_text">
+                <h1>Lorem ipsum(3)</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="slider_text">
+                <h1>Lorem ipsum(4)</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+            <div class="slider_text">
+                <h1>Lorem ipsum(5)</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            </div>
+        </div>
+        <div class="control_panel">   <!-- 버튼이 보여지는 공간-->
+            <div class="control_btn"></div>
+            <div class="control_btn"></div>
+            <div class="control_btn"></div>
+            <div class="control_btn"></div>
+            <div class="control_btn"></div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            // 초기 텍스트 위치 지정 및 인덱스를 할당
+            $('.slider_text').css('left',-300) // 텍스트의 초기 위치 : 캔버스에서 안보이도록 밀어냄
+                             .each(function(index){ // 각 텍스트 박스에 번호를 지정
+                                $(this).attr('idx',index);
+                             });
+
+            // 컨트롤 버튼에도 인덱스 번호를 할당
+            $('.control_btn').each(function(index){ // 각 버튼에 번호를 지정
+                $(this).attr('idx',index);
+            }).click(function(){
+                let index = $(this).attr('idx'); // 클릭한 버튼의 인덱스값 읽어오기
+                moveSlider(index); // 버튼 클릭시 이미지 이동
+            });
+
+            // [핵심] 이미지 슬라이더 기능  => 어떤 그림을 보여줄지 => 인덱스(번호)
+            function moveSlider(index){
+                // 1. 이미지 이동
+                let moveLeft = -(index*600);
+                $('.slider_panel').animate({
+                    left:moveLeft
+                },'slow');
+
+                // 2. 텍스트 이동
+                //   - 선택된 텍스트 보여주기
+                $('.slider_text[idx='+index+']').show().animate({
+                    left:0
+                },'slow');
+                //   - 선택되지 않은 텍스트 사라지기
+                $('.slider_text[idx!='+index+']').hide('slow',function(){
+                    $(this).css('left',-300);
+                })
+
+                // 3. 버튼이 활성화
+                //   - 선택된 버튼은 활성화
+                $('.control_btn[idx='+index+']').addClass('active');
+                //   - 선택되지 않은 버튼은 비활성화
+                $('.control_btn[idx!='+index+']').removeClass('active');
+            };
+                            
+
+            // 최초 슬라이더 위치를 랜덤으로
+            let randomIndex = Math.floor(Math.random()*5);
+            moveSlider(randomIndex);
+
+            // 일정 시간이 되면 랜덤한 위치로 이미지가 변화되도록
+            setInterval(function(){
+                let randomIndex = Math.floor(Math.random()*5);
+                moveSlider(randomIndex);
+            },3000);
+
+
+        })
+
+
+    </script>
+</body>
+</html>

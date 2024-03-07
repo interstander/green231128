@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        .reverse{
+            color: white;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>안녕하세여 1</h1>
+    <h1>안녕하세여 2</h1>
+    <h1>안녕하세여 3</h1>
+
+    <script>
+    // 이벤트
+    //  1. 어떤 이벤트가 발생했는가?
+    //  2. 이벤트가 발생했을 때 어떤 동작을 할 것인가? : 함수
+
+    // 제이쿼리가 제공하는 이벤트 함수 : on
+    //   on(이벤트종류,함수)
+
+    $('h1').on('click',function(event){
+        // $(event.currentTarget).html(function(index,html){
+        //     return html+'+';
+        // });
+        $(this).html(function(index,html){
+            return html+'+';
+        });
+    });
+
+//  여러 이벤트를 복합적으로 적용할 때는 객체
+
+    $('h1').on({
+        'mouseenter':function(){
+            $(this).addClass('reverse');
+        },
+        'mouseleave':function(){
+            $(this).removeClass('reverse');
+        }
+    })
+
+    //  이미 적용된 이벤트 제거
+    setTimeout(function(){
+        $('h1').off('click');
+    },10000)
+
+//   이벤트를 '한번만' 실행할수 있도록 하는 함수 : one
+    $('h1').one('dblclick',function(){
+        alert('더블 클릭!');
+    });
+
+    
+
+
+
+    </script>
+</body>
+</html>

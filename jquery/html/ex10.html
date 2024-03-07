@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        body{
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>안녕하세요</h1>
+
+    <script>
+        // h1태그를 클릭하면 새로운 h1태그가 생기도록 만들어 봅시다.
+        // $('h1').click(function(){
+        //     $('<h1></h1>').html('안녕하세요').appendTo($('body'));
+        // })
+
+    // [문제점] :  새롭게 추가된 태그에는 이벤트가 적용되지 않는 현상
+    //   => 새롭게 추가된 태그에도 이벤트가 동작되도록 
+
+    // [해결법 1] 재귀함수 => 이벤트 핸들러를 달아두기
+    // let handler = function(){
+    //     $('<h1></h1>').html('안녕하세요').appendTo($('body')).click(handler);
+    // }
+
+    // $('h1').click(handler);
+
+    //  [해결법 2] : body에 이벤트를 붙인다.
+    $('body').on('click','h1',function(){
+        // 이벤트는 body에 붙이고 이벤트 적용대상이 h1인 경우에만 이벤트가 동작되도록
+        $('<h1></h1>').html('안녕하세요').appendTo($('body'));
+    });
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        .page{
+            border: 1px solid red;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" id="showBtn">문서 확대</button>
+    <button type="button" id="hideBtn">문서 축소</button>
+    <button type="button" id="toggleBtn">문서 확대/축소</button><br>
+    <button type="button" id="slidedownBtn">슬라이드 확대</button>
+    <button type="button" id="slideupBtn">슬라이드 축소</button>
+    <button type="button" id="slideToggleBtn">슬라이드 확대/축소</button><br>
+    <button type="button" id="fadeinBtn">페이드 확대</button>
+    <button type="button" id="fadeoutBtn">페이드 축소</button>
+    <button type="button" id="fadeToggleBtn">페이드 확대/축소</button><br>
+    <div class="page">
+        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h1>
+        <p> Deleniti, sed! Natus voluptates magni voluptatum sequi at fugiat voluptate laboriosam eius impedit odit officiis, obcaecati, similique expedita quod quis praesentium perferendis.</p>
+    </div>
+
+    <script>
+        // 시각 효과 - 제이쿼리가 제공하는 기본 시각 효과
+        //    => 나타나기, 사라지기
+        
+        // 1. 문서객체의 확대, 축소
+        // 2. 문서 객체의 슬라이드 효과
+        // 3. 문서 객체의 페이드 효과
+
+        //---------------------------------------------
+        //  시각효과 메서드에는 매개값
+        //    첫번째 매개값: 진행 속도 : slow, normal, fast, 밀리초
+        //    두번째 매개값: 함수 : 효과가 완료된 후 동작할 함수
+        //    세번째 매개값: 전환효과 (eaging ):  기본값이 linear , swing
+
+        // 1) 확대, 축소
+        //    확대 : show()
+        //    축소 : hide()
+        //   확대/축소 : toggle()
+        $('button#showBtn').click(function(){
+            $('div.page').show('slow');
+        })
+        $('button#hideBtn').click(function(){
+            $('div.page').hide(3000);
+        })
+        $('button#toggleBtn').click(function(){
+            $('div.page').toggle(5000);
+        })
+        // 2) 슬라이드 효과
+        //     나타나기 : slidedown()
+        //     사라지기 : slideup()
+        //   나타나기 / 사라지기 : slideToggle()
+        $('button#slidedownBtn').click(function(){
+            $('div.page').slideDown('slow',function(){
+                alert('나타났다!');
+            });
+        })
+        $('button#slideupBtn').click(function(){
+            $('div.page').slideUp(3000,function(){
+                alert('사라졌다!');
+            });
+        })
+        $('button#slideToggleBtn').click(function(){
+            $('div.page').slideToggle(5000,function(){
+                alert('슬라이드 전환 완료!');
+            });
+        })
+        // 3) 페이드 효과
+        //   나타나기 : fadein()
+        //   사라지기 : fadeout()
+        //  나타나기 / 사라지기 : fadeToggle()
+        $('button#fadeinBtn').click(function(){
+            $('div.page').fadeIn('slow','swing',function(){
+                alert('나타났다!');
+            });
+        })
+        $('button#fadeoutBtn').click(function(){
+            $('div.page').fadeOut(3000,'swing',function(){
+                alert('사라졌다!');
+            });
+        })
+        $('button#fadeToggleBtn').click(function(){
+            $('div.page').fadeToggle(5000,'swing',function(){
+                alert('페이드 전환 완료!');
+            });
+        })
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <h1>안녕하세요!</h1>
+    <h1>안녕하세요!</h1>
+    <h1>안녕하세요!</h1>
+    <hr>
+    <h2></h2>
+    <h2></h2>
+    <hr>
+    <img><img><img>
+
+    <script>
+    // 2. 선택된 문서객체에 효과(기능)을 적용하는 방법
+    //   - 속성을 적용할 때
+
+    //  1) setter 기능 : 속성에 값을 저장할 때
+        // 반환값이 제이쿼리 객체 => 메서드 체이닝 기술
+    
+        // 가) (속성이름, 속성값)
+        // $('h1').css('color','red');
+        // $('h1').html('반갑습니다.');
+
+        // 나) (객체)
+//  자바스크립트의 객체 = {'이름1':'값1','이름2':'값2','이름3':'값3','이름4':'값4'}
+            $('h1').css({
+                'color':'red',
+                'background-color':'orange',
+                'textAlign':'center'
+            });
+
+    //  css 함수의 속성명
+    //   -문자열로 사용하는 경우에
+    //    이름을 붙여서 사용해도 되고, -를 이용해서 표기해도 됨
+    //      backgroundColor       ,    background-color
+    //   - 문자열이 아닌 값으로 사용하는 경우 반드시 자바스크립트 문법을 따라야 하한다.
+    //      backgroundColor (O)      ,    background-color (X)
+            $('h1').css({
+                color:'red',
+                backgroundColor:'orange',   // background-color (X)
+                textAlign:'center'          // text-align (X)
+            });
+
+
+
+        //  다)  (함수)
+            let arr = ['red','blue','green'];
+            $('h1').css('color',function(index){
+                return arr[index];
+            });
+          
+        //  라)  (함수와 객체)
+
+            let backColor = ['pink','aqua','lightgreen'];
+
+            $('h1').css({
+                color:function(index){
+                    return arr[index];
+                },
+                backgroundColor:function(index){
+                    return backColor[index];
+                }
+            });
+    
+    //  2) getter 기능 : 속성에 저장된 값을 읽어올 때
+    //       => setter 와 똑같이 사용 -> 매개값을 1개만
+        //   반환값이 '문자열'
+
+        let value = $('h1').css('color');
+        //    문서 객체가 여러개인 경우 첫번째 객체 것만 반환
+        console.log('글자색 : '+value);
+        // alert('글자색 : '+value);
+
+//----------------------------------------------------------------------
+//   html메서드
+//      -> 문서 객체 내부의 컨텐츠로 문자열을 삽입할 때
+//      -> innerHTML
+
+//   - setter
+    //  1) 문자열
+    // $('h2').html('반갑습니다.');
+
+    //   2) 함수
+    $('h2').html(function(index){
+        return "안녕히 가세요 - "+index;
+    })
+
+//  innerHTML  / textContent
+//  태그 요소를 직접 삽입해 봅시다.
+//      $('h2').html("<img src='http://placehold.it/100x100' /> 안녕히 가세요");
+
+//[비교]  text()  : html과 유사하지만 태그가 아닌 무조건 문자열로만 인식
+        $('h2').text("<img src='http://placehold.it/100x100' /> 안녕히 가세요");
+
+//  getter
+    let text1 = $('h2').html(); // => 첫번째 객체의 값만 추출 
+    console.log('text1 : '+text1);   // => 실제 객체를 선택할 때는 가급적 구체적으로 선택하는 것을 권장
+
+    let text2 = $('h2').text();   //  => 모든 객체의 값을 텍스트화 해서 추출
+    console.log('text2 : '+text2);
+
+//-----------------------------------------------------------------------------------------
+    // 일반 속성 : attr()
+    //  setter 
+    //    - 문자열
+//    $('img').attr('src','http://placehold.it/100x100');
+
+    //    - 객체
+        // $('img').attr({
+        //     'src':'http://placehold.it/100x100',
+        //     alt:'test image'
+        // });
+
+    //    - 함수
+    // $('img').attr('src',function(index){
+    //     return 'http://placehold.it/100x'+(index+1)*100;
+    // })
+
+    //    -함수 + 객체
+    $('img').attr({
+        'src':function(index){
+            return 'http://placehold.it/100x'+(index+1)*100;
+        },
+        alt:'test image'
+    }); 
+
+//   getter
+    let test = $('img').attr('src');
+    console.log('test : '+test);
+
+    </script>
+</body>
+</html>

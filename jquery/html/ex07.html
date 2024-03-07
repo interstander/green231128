@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        .red{
+            color:red;
+        }
+        .center{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1> 안녕하세요 </h1>
+    <script>
+        // $('h1').css('속성이름');             // 스타일에 적용된 속성 값 읽어오기
+        // $('h1').css('속성이름','속성값');     // 스타일에 속성 값 적용하기
+
+        // $('h1').attr('속성이름');            // 태그요소에 적용된 속성값 읽어오기
+        // $('h1').attr('속성이름','속성값');    // 태그요소에 속성 값 적용하기
+        
+        // $('h1').attr('class','red')  // h1태그의 class속성의 값을 red로 지정
+        // $('h1').removeAttr('class');  // class속성을 제거
+
+//----------------------------------------------------------------------------------------
+//      class 속성의 경우 값을 여러개 추가해서 사용이 가능
+//      <h1 class="a b c d">
+
+        // class 속성 추가  addClass
+        $('h1').addClass('red');  // 클래스 속성에 값으로 red 추가
+
+        //  class에 특정 값이 있는지 판단  hasClass
+        let result1 = $('h1').hasClass('red');  //결과는 true, false
+        console.log('result1 : '+result1);
+        let result2 = $('h1').hasClass('header');  //결과는 true, false
+        console.log('result2 : '+result2);
+
+        // class 속성을 제거 : removeClass
+        setTimeout(function(){
+            $('h1').removeClass('red');
+        },3000)
+
+        //  클래스 토글 : 있으면 빼고, 없으면 추가 : toggleClass()
+        setInterval(function(){
+            $('h1').toggleClass('center');
+        },2000)
+
+
+
+
+
+
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

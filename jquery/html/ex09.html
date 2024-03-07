@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <h1>안녕하세요</h1>
+    <a href="https://www.naver.com">네이버</a>
+    <script>
+    // 
+    // $('h1').on('click',function(event){
+    $('h1').click(function(event){
+        alert('안녕하세요-A');
+        $(event.currentTarget).html('Click Me');
+        $(this).css('color','red');
+    });
+
+//   이벤트 함수에 특정 값을 넘겨줄 수있다.
+    $('h1').click(100,function(event){
+        alert(event.data);  // -> 이벤트 내부에 보내진 데이터
+    })
+
+//   태그의 기본기능 차단 
+//   event.preventDefault();
+
+    $('a').click(function(event){
+        $(this).html('카카오');
+        $(this).css({
+            color : 'yellow',
+            backgroundColor : 'black'
+        });
+        event.preventDefault();
+    })
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무한 스크롤</title>
+    <script src="../jquery/jquery-3.7.1.js"></script>
+    <style>
+        *{
+            margin:0;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $(window).scroll(function(){// 스크롤 바가 움직일 때마다 함수가 동작
+                // 필요한 변수를 계산 해 봅시다.
+                // 1. 화면의 높이
+                let viewSize = $(window).height();
+                // 2. 문서의 높이
+                let documentSize = $(document).height();
+                // 3. 스크롤된 거리
+                //let scrollDistance = Math.ceil($(window).scrollTop());
+                let scrollDistance = $(window).scrollTop();
+
+                // console.log('스크롤 거리 : '+scrollDistance);
+                // console.log('화면 높이 : '+viewSize);
+                // console.log('문서 높이 : '+documentSize);
+                
+
+                // if(바닥에 닿았을 때){
+                if((viewSize + scrollDistance) == documentSize){
+                    for(let i=0;i<10;i++){
+                        $('<h1></h1>').html('무한 인사 - 안녕하세요').appendTo($('body'));
+                    }
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+    <h1>무한 인사 - 안녕하세요</h1>
+</body>
+</html>
